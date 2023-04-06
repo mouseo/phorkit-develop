@@ -107,7 +107,9 @@
     "transfer-storybook": "rsync -avz --delete build/storybook $npm_config_deploy_storybook_path",
     "validate": "npx eslint \"src/**/*.{js,json,ts,tsx}\" && npx stylelint \"src/**/*.css\"",
     "watch": "npx tsc --watch --noEmit --project './tsconfig.json'",
-    "watch-tests": "npx tsc --watch --noEmit --project '__tests__/tsconfig.json'"
+    "watch-tests": "npx tsc --watch --noEmit --project '__tests__/tsconfig.json'",
+    "storybook": "start-storybook -p 6006 -s public",
+  "serve-storybook": "serve storybook-static"
   },
   "husky": {
     "hooks": {
