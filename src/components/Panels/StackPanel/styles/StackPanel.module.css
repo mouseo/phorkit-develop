@@ -1,0 +1,28 @@
+.stackPanel {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  position: relative;
+}
+
+.stackPanel--flexible {
+  flex: 0 0 auto;
+}
+
+.stackPanel--raised {
+  z-index: $layout-z-index-stack-panel;
+}
+
+.stackPanel--fixed {
+  left: 0;
+  position: absolute;
+  right: 0;
+
+  &.stackPanel--top {
+    top: 0;
+  }
+
+  &.stackPanel--bottom {
+    bottom: 0;
+  }
+}

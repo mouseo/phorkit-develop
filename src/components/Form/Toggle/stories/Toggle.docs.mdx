@@ -1,0 +1,71 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Looper } from 'components/Looper';
+import { Rhythm } from 'components/Rhythm';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { FormComponentDemo } from '../../stories/helpers/FormComponentDemo';
+import { NotifiedToggle } from '../NotifiedToggle';
+import { Toggle } from '../Toggle';
+
+<PageTitle src="components/Form/Toggle" title="Toggle" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <FormComponentDemo initialValue={true} property="checked" type="toggle">
+    <Toggle checked contrast>
+      Super fantastic label
+    </Toggle>
+  </FormComponentDemo>
+</Canvas>
+
+## Examples
+
+### Full width labeled toggle
+
+<Canvas>
+  <FormComponentDemo initialValue={true} property="checked" style={{ width: 400 }} type="toggle">
+    <Toggle full>Super fantastic label</Toggle>
+  </FormComponentDemo>
+  <br />
+  <FormComponentDemo initialValue={true} property="checked" style={{ width: 400 }} type="toggle">
+    <Toggle full reverse>
+      Super fantastic label
+    </Toggle>
+  </FormComponentDemo>
+</Canvas>
+
+### Wrapped labeled toggle
+
+<Canvas>
+  <FormComponentDemo initialValue={true} property="checked" type="toggle">
+    <Toggle>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget dui eu orci ultrices maximus eu eu ante.
+      Vestibulum ligula velit, scelerisque vitae venenatis tempor, consectetur a orci. Aenean molestie eu tortor in
+      pharetra. Nulla lobortis, sapien quis ornare venenatis, nunc libero finibus justo, non tempor nisi urna quis
+      justo. Integer sit amet venenatis leo.
+    </Toggle>
+  </FormComponentDemo>
+</Canvas>
+
+## Notifications
+
+<Canvas>
+  <Looper
+    list={['danger', 'warning', 'success', 'primary', 'neutral']}
+    render={level => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue={true} property="checked" type="toggle">
+          <NotifiedToggle level={level} notification={`This is an example ${level} notification.`}>
+            Super fantastic label
+          </NotifiedToggle>
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>

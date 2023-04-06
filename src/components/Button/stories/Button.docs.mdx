@@ -1,0 +1,213 @@
+import { action } from '@storybook/addon-actions';
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { ucfirst } from 'utils';
+import { SpinnerIcon } from 'icons/SpinnerIcon';
+import { Flex } from 'components/Flex';
+import { Looper } from 'components/Looper';
+import { Rhythm } from 'components/Rhythm';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { Button } from '../Button';
+
+<PageTitle src="components/Button" title="Button" />
+<Subtitle />
+<Description />
+
+#### Colors
+
+[Primary](#color--primary) | [Success](#color--success) | [Warning](#color--warning) | [Danger](#color--danger) | [Neutral](#color--neutral) | [Black](#color--black) | [White](#color--white)
+
+#### Shapes
+
+[Pill](#shape--pill) | [Brick](#shape--brick)
+
+#### Weights
+
+[Solid](#weight--solid) | [Shaded](#weight--shaded) | [Outlined](#weight--outlined) | [Ghost](#weight--ghost) | [Inline](#weight--inline)
+
+#### Sizes
+
+[Small](#size--small) | [Medium](#size--medium) | [Large](#size--large)
+
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <Button contrast>Click me</Button>
+</Canvas>
+
+## Examples
+
+<Canvas>
+  <Rhythm grouped m={-2}>
+    <Looper
+      list={['solid', 'shaded', 'outlined', 'ghost']}
+      render={weight => (
+        <Rhythm grouped key={weight || 'undefined'} m={2}>
+          <Flex direction="row">
+            <Looper
+              list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+              render={color => (
+                <Rhythm key={`${weight}-${color}`} mx={2} my={1}>
+                  <Button color={color} onClick={() => action(color)} weight={weight}>
+                    {ucfirst(color)}
+                  </Button>
+                </Rhythm>
+              )}
+            />
+          </Flex>
+          <Flex direction="row">
+            <Looper
+              list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+              render={color => (
+                <Rhythm key={`${weight}-${color}`} mx={2} my={1}>
+                  <Button
+                    disabled
+                    loading
+                    color={color}
+                    loader={<SpinnerIcon scale="medium" />}
+                    onClick={() => action(color)}
+                    weight={weight}
+                  >
+                    {ucfirst(color)}
+                  </Button>
+                </Rhythm>
+              )}
+            />
+          </Flex>
+        </Rhythm>
+      )}
+    />
+  </Rhythm>
+</Canvas>
+
+<Canvas>
+  <Rhythm grouped m={-2}>
+    <Looper
+      list={['solid', 'shaded', 'outlined', 'ghost']}
+      render={weight => (
+        <Rhythm grouped key={weight || 'undefined'} m={2}>
+          <Flex direction="row">
+            <Looper
+              list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+              render={color => (
+                <Rhythm key={`${weight}-${color}`} mx={2} my={1}>
+                  <Button color={color} onClick={() => action(color)} shape="brick" weight={weight}>
+                    {ucfirst(color)}
+                  </Button>
+                </Rhythm>
+              )}
+            />
+          </Flex>
+          <Flex direction="row">
+            <Looper
+              list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+              render={color => (
+                <Rhythm key={`${weight}-${color}`} mx={2} my={1}>
+                  <Button
+                    disabled
+                    loading
+                    color={color}
+                    loader={<SpinnerIcon scale="medium" />}
+                    onClick={() => action(color)}
+                    shape="brick"
+                    weight={weight}
+                  >
+                    {ucfirst(color)}
+                  </Button>
+                </Rhythm>
+              )}
+            />
+          </Flex>
+        </Rhythm>
+      )}
+    />
+  </Rhythm>
+</Canvas>
+
+<Canvas>
+  <Rhythm grouped m={-2}>
+    <Flex direction="row">
+      <Looper
+        list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+        render={color => (
+          <Rhythm key={color} m={2}>
+            <Button color={color} onClick={() => action(color)} shape="brick" weight="inline">
+              {ucfirst(color)}
+            </Button>
+          </Rhythm>
+        )}
+      />
+    </Flex>
+    <Flex direction="row">
+      <Looper
+        list={['primary', 'success', 'warning', 'danger', 'neutral', 'black', 'white']}
+        render={color => (
+          <Rhythm key={color} m={2}>
+            <Button
+              disabled
+              loading
+              color={color}
+              loader={<SpinnerIcon scale="medium" />}
+              onClick={() => action(color)}
+              shape="brick"
+              weight="inline"
+            >
+              {ucfirst(color)}
+            </Button>
+          </Rhythm>
+        )}
+      />
+    </Flex>
+  </Rhythm>
+</Canvas>
+
+<Canvas contrast>
+  <Rhythm grouped m={-2}>
+    <Flex alignItems="center" direction="row">
+      <Looper
+        list={['solid', 'shaded', 'outlined', 'ghost', 'inline']}
+        render={weight => (
+          <Rhythm key={weight} m={2}>
+            <Button contrast weight={weight}>
+              {ucfirst(weight)}
+            </Button>
+          </Rhythm>
+        )}
+      />
+    </Flex>
+    <Flex alignItems="center" direction="row">
+      <Looper
+        list={['solid', 'shaded', 'outlined', 'ghost', 'inline']}
+        render={weight => (
+          <Rhythm key={weight} m={2}>
+            <Button contrast loading key={weight} loader={<SpinnerIcon scale="medium" />} weight={weight}>
+              {ucfirst(weight)}
+            </Button>
+          </Rhythm>
+        )}
+      />
+    </Flex>
+  </Rhythm>
+</Canvas>
+
+### Alignment
+
+<Canvas>
+  <Rhythm grouped m={-2}>
+    <Rhythm m={2}>
+      <Button align="left" color="primary" style={{ width: 200 }}>
+        Align left
+      </Button>
+      <Button color="primary" style={{ width: 200 }}>
+        Align center
+      </Button>
+      <Button align="right" color="primary" style={{ width: 200 }}>
+        Align right
+      </Button>
+    </Rhythm>
+  </Rhythm>
+</Canvas>

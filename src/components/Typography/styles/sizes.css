@@ -1,0 +1,51 @@
+.text-size-2xsmall {
+  font-size: $font-size-2xsmall;
+}
+
+.text-size-xsmall {
+  font-size: $font-size-xsmall;
+}
+
+.text-size-small {
+  font-size: $font-size-small;
+}
+
+.text-size-medium {
+  font-size: $font-size-medium;
+}
+
+.text-size-large {
+  font-size: $font-size-large;
+}
+
+.text-size-xlarge {
+  font-size: $font-size-xlarge;
+}
+
+.text-size-2xlarge {
+  font-size: $font-size-2xlarge;
+}
+
+.text-size-3xlarge {
+  font-size: $font-size-3xlarge;
+}
+
+.text-size-4xlarge {
+  font-size: $font-size-4xlarge;
+}
+
+.text-size-5xlarge {
+  font-size: $font-size-5xlarge;
+}
+
+.text-size-6xlarge {
+  font-size: $font-size-6xlarge;
+}
+
+.text-size-7xlarge {
+  font-size: $font-size-7xlarge;
+}
+
+.text-size-8xlarge {
+  font-size: $font-size-8xlarge;
+}

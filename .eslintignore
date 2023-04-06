@@ -1,0 +1,16 @@
+*.json
+.docz/
+lib/
+build/
+postcss.config.js
+scripts/
+src/**/*.test.js
+src/styles/
+src/icons/
+webpack.*.js
+jest.config.js
+jest.config.ci.js
+__mocks__
+README.md
+CHANGELOG.md
+CONTRIBUTING.md

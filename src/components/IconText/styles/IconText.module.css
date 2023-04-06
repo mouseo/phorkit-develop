@@ -1,0 +1,26 @@
+.iconText {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.iconText--inline {
+  display: inline-flex;
+}
+
+.iconText--reverse {
+  flex-direction: row-reverse;
+}
+
+.iconText__icon,
+.iconText__text {
+  display: flex;
+}
+
+.iconText__icon {
+  flex: none;
+}
+
+.iconText__text {
+  flex: 1;
+}

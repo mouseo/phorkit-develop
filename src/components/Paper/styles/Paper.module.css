@@ -1,0 +1,225 @@
+@import '../../../styles/common/mixins/addScrollbar.css';
+
+.paper {
+  background-color: var(--paper-background-color);
+  border-color: var(--paper-border-color);
+  color: var(--paper-text-color);
+  position: relative;
+}
+
+.paper--full {
+  height: 100%;
+  width: 100%;
+}
+
+.paper--contained {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.paper--scrollable {
+  &.paper--medium-scrollbar {
+    @mixin addScrollbar var(--paper-scrollbar-thumb-color);
+  }
+
+  &.paper--small-scrollbar {
+    @mixin addSmallScrollbar var(--paper-scrollbar-thumb-color);
+  }
+
+  &.paper--xsmall-scrollbar {
+    @mixin addXSmallScrollbar var(--paper-scrollbar-thumb-color);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.is-accessible:focus {
+    outline: 1px solid var(--paper-focused-outline-color);
+    outline-offset: -1px;
+  }
+
+  overflow: auto;
+}
+
+.paper--flexible {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.paper--bordered {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.paper--narrowPage {
+  padding: 20px 70px;
+
+  @media (--viewport-xsmall-down) {
+    padding: 20px 24px;
+  }
+}
+
+.paper--page {
+  padding: 20px 40px;
+
+  @media (--viewport-xsmall-down) {
+    padding: 20px 24px;
+  }
+}
+
+.paper--panel {
+  padding: 12px 40px;
+
+  @media (--viewport-xsmall-down) {
+    padding: 12px 24px;
+  }
+}
+
+.paper--banner {
+  padding: 16px 40px;
+
+  @media (--viewport-xsmall-down) {
+    padding: 16px 24px;
+  }
+}
+
+.paper--popover {
+  padding: 12px 20px;
+}
+
+.paper--extreme {
+  @mixin themed .paper {
+    --paper-background-color: $theme-extreme-palette-background-color;
+    --paper-border-color: $theme-extreme-palette-border-color;
+    --paper-focused-outline-color: $theme-extreme-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+    --paper-text-color: $theme-extreme-palette-text-color;
+  }
+}
+
+.paper--primary {
+  @mixin themed .paper {
+    --paper-background-color: $theme-primary-palette-background-color;
+    --paper-border-color: $theme-primary-palette-border-color;
+    --paper-focused-outline-color: $theme-primary-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+    --paper-text-color: $theme-primary-palette-text-color;
+  }
+}
+
+.paper--secondary {
+  @mixin themed .paper {
+    --paper-background-color: $theme-secondary-palette-background-color;
+    --paper-border-color: $theme-secondary-palette-border-color;
+    --paper-focused-outline-color: $theme-secondary-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+    --paper-text-color: $theme-secondary-palette-text-color;
+  }
+}
+
+.paper--tertiary {
+  @mixin themed .paper {
+    --paper-background-color: $theme-tertiary-palette-background-color;
+    --paper-border-color: $theme-tertiary-palette-border-color;
+    --paper-focused-outline-color: $theme-tertiary-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+    --paper-text-color: $theme-tertiary-palette-text-color;
+  }
+}
+
+.paper--transparent {
+  @mixin themed .paper {
+    --paper-background-color: transparent;
+    --paper-border-color: $theme-primary-palette-border-color;
+    --paper-focused-outline-color: $theme-primary-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+    --paper-text-color: $theme-primary-palette-text-color;
+  }
+}
+
+.paper--contrast {
+  @mixin themed .paper {
+    --paper-background-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    --paper-border-color: $theme-contrast-palette-border-color;
+    --paper-focused-outline-color: $theme-contrast-palette-text-color;
+    --paper-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+    --paper-text-color: $theme-contrast-palette-text-color;
+  }
+}
+
+.paper--success {
+  @mixin themed .paper {
+    --paper-background-color: $theme-color-success;
+    --paper-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+    --paper-text-color: $theme-color-success-contrast;
+  }
+
+  &.paper--light {
+    --paper-border-color: $light-color-success-D10;
+    --paper-focused-outline-color: $light-color-success-D30;
+  }
+
+  &.paper--dark {
+    --paper-border-color: $dark-color-success-L10;
+    --paper-focused-outline-color: $dark-color-success-L30;
+  }
+}
+
+.paper--warning {
+  @mixin themed .paper {
+    --paper-background-color: $theme-color-warning;
+    --paper-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+    --paper-text-color: $theme-color-warning-contrast;
+  }
+
+  &.paper--light {
+    --paper-border-color: $light-color-warning-D10;
+    --paper-focused-outline-color: $light-color-warning-D30;
+  }
+
+  &.paper--dark {
+    --paper-border-color: $dark-color-warning-L10;
+    --paper-focused-outline-color: $dark-color-warning-L30;
+  }
+}
+
+.paper--danger {
+  @mixin themed .paper {
+    --paper-background-color: $theme-color-danger;
+    --paper-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+    --paper-text-color: $theme-color-danger-contrast;
+  }
+
+  &.paper--light {
+    --paper-border-color: $light-color-danger-D10;
+    --paper-focused-outline-color: $light-color-danger-D30;
+  }
+
+  &.paper--dark {
+    --paper-border-color: $dark-color-danger-L10;
+    --paper-focused-outline-color: $dark-color-danger-L30;
+  }
+}
+
+.paper--accent {
+  @mixin themed .paper {
+    --paper-background-color: var(--phork-accent-color, $theme-color-accent);
+    --paper-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+    --paper-text-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+
+    &.paper--light {
+      --paper-border-color: var(--phork-accent-color-D10, $theme-color-accent-D10);
+      --paper-focused-outline-color: var(--phork-accent-color-D30, $theme-color-accent-D30);
+    }
+
+    &.paper--dark {
+      --paper-border-color: var(--phork-accent-color-L10, $theme-color-accent-L10);
+      --paper-focused-outline-color: var(--phork-accent-color-L30, $theme-color-accent-L30);
+    }
+  }
+}

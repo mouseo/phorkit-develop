@@ -1,0 +1,17 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { Divider } from '../Divider';
+
+<PageTitle src="components/Divider" title="Divider" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <Divider contrast />
+</Canvas>

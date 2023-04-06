@@ -1,0 +1,176 @@
+.progress {
+  background-color: var(--progress-background-color);
+  display: flex;
+  flex: none;
+  overflow: hidden;
+}
+
+.progress--horizontal {
+  flex-direction: row;
+  height: var(--progress-thickness);
+  width: 100%;
+}
+
+.progress--vertical {
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 100%;
+  width: var(--progress-thickness);
+}
+
+.progress--primary,
+.progress--success,
+.progress--warning,
+.progress--danger,
+.progress--neutral {
+  @mixin themed .progress {
+    background-color: $theme-color-BG30;
+  }
+}
+
+.progress--contrast {
+  @mixin themed .progress {
+    background-color: $theme-contrast-palette-quietest-color;
+  }
+}
+
+.progress--quiet {
+  opacity: $opacity-quiet;
+}
+
+.progress--quieter {
+  opacity: $opacity-quieter;
+}
+
+.progress--quietest {
+  opacity: $opacity-quietest;
+}
+
+.progress--small {
+  --progress-thickness: 1px;
+}
+
+.progress--medium {
+  --progress-thickness: 4px;
+}
+
+.progress--large {
+  --progress-thickness: 8px;
+}
+
+.progress--rounded {
+  border-radius: var(--progress-thickness);
+
+  .progressSegment:last-child {
+    &.progressSegment--horizontal {
+      border-top-right-radius: var(--progress-thickness);
+      border-bottom-right-radius: var(--progress-thickness);
+    }
+
+    &.progressSegment--vertical {
+      border-top-left-radius: var(--progress-thickness);
+      border-top-right-radius: var(--progress-thickness);
+    }
+  }
+}
+
+.progress--floating {
+  @mixin themed .progress {
+    background-color: transparent;
+  }
+}
+
+/**
+ * 1. Use background not background-color here to allow
+ *    for gradients.
+ */
+.progressSegment {
+  background: var(--progress-segment-color); /* [1] */
+  display: block;
+  flex: none;
+  transition: width var(--progress-transition-time, 200ms) ease, height var(--progress-transition-time, 200ms) ease,
+    background-color 200ms ease;
+
+  &.progressSegment--horizontal {
+    height: 100%;
+    width: 0;
+  }
+
+  &.progressSegment--vertical {
+    height: 0;
+    width: 100%;
+  }
+}
+
+.progressSegment--primary {
+  @mixin themed .progressSegment {
+    background-color: var(--phork-accent-color, $theme-color-accent);
+  }
+}
+
+.progressSegment--success {
+  @mixin themed .progressSegment {
+    background-color: $theme-color-success;
+  }
+}
+
+.progressSegment--warning {
+  @mixin themed .progressSegment {
+    background-color: $theme-color-warning;
+  }
+}
+
+.progressSegment--danger {
+  @mixin themed .progressSegment {
+    background-color: $theme-color-danger;
+  }
+}
+
+.progressSegment--neutral {
+  @mixin themed .progressSegment {
+    background-color: $theme-color-neutral;
+  }
+}
+
+.progressSegment--contrast {
+  @mixin themed .progressSegment {
+    background-color: $theme-contrast-palette-text-color;
+  }
+}
+
+@keyframes progressSegmentBackgroundHorizontal {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+}
+
+.progressSegment--animated {
+  background-size: 1rem 1rem;
+  background-image: linear-gradient(
+    135deg,
+    var(--progress-segment-animation-color) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--progress-segment-animation-color) 50%,
+    var(--progress-segment-animation-color) 75%,
+    transparent 75%,
+    transparent
+  );
+
+  &.progressSegment--horizontal {
+    animation: progressSegmentBackgroundHorizontal 200s infinite;
+  }
+
+  &.progressSegment--light,
+  &.progressSegment--dark.progressSegment--contrast {
+    --progress-segment-animation-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &.progressSegment--dark,
+  &.progressSegment--light.progressSegment--contrast {
+    --progress-segment-animation-color: rgba(0, 0, 0, 0.1);
+  }
+}

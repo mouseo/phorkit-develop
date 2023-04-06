@@ -1,0 +1,143 @@
+@import '../../../styles/common/mixins/addScrollbar.css';
+
+$horizontal-padding: 36px;
+$horizontal-padding-xsmall-down: 24px;
+$vertical-padding: 20px;
+
+/**
+ * 1. Set the maximum modal size so that it fills the
+ *    viewport with 20px of padding on each side.
+ */
+.modal {
+  @mixin addScrollbar var(--modal-scrollbar-thumb-color);
+
+  background-color: var(--modal-background-color);
+  border-radius: $border-radius-small;
+  box-shadow: var(--modal-box-shadow);
+  color: var(--modal-text-color);
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-medium;
+  margin: 8px;
+  max-height: calc(100vh - 20px); /* [1] */
+  max-width: calc(100vw - 20px); /* [1] */
+  pointer-events: all;
+  position: relative;
+
+  &:not(.modal--allowOverflow) {
+    overflow: auto;
+    overflow: overlay;
+  }
+
+  @mixin themed {
+    background-color: $theme-primary-palette-background-color;
+    box-shadow: $theme-box-shadow-10;
+    color: $theme-primary-palette-text-color;
+
+    --modal-content-border-color: $theme-primary-palette-border-color;
+    --modal-scrollbar-thumb-color: $light-primary-scrollbar-thumb-color;
+  }
+}
+
+.modal--transitional {
+  opacity: 0;
+  top: 30px;
+  transition-duration: 80ms;
+  transition-property: opacity, top;
+  transition-timing-function: ease-out;
+
+  &.has-transitioned {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.modal--small {
+  width: 440px;
+}
+
+.modal--medium {
+  width: 660px;
+}
+
+.modal--large {
+  width: 880px;
+}
+
+.modal--xlarge {
+  width: 90%;
+}
+
+.modalActions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+
+  > button {
+    padding: 4px;
+    margin-left: 4px;
+  }
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  &:not(.modalBody--flush) {
+    padding: $vertical-padding $horizontal-padding;
+
+    @media (--viewport-xsmall-down) {
+      padding-left: $horizontal-padding-xsmall-down;
+      padding-right: $horizontal-padding-xsmall-down;
+    }
+  }
+}
+
+/**
+ * Use a content div so the flexbox on the modal
+ * body doesn't interfere with the content.
+ */
+.modalBody__content {
+  position: relative;
+  flex: 1;
+}
+
+.modalBody--scrollable {
+  @mixin addScrollbar var(--modal-scrollbar-thumb-color);
+
+  flex: auto;
+  overflow: auto;
+  overflow: overlay;
+}
+
+.modalHeader {
+  flex: none;
+  margin-bottom: 4px;
+  padding: $vertical-padding $horizontal-padding 8px;
+
+  @media (--viewport-xsmall-down) {
+    padding-left: $horizontal-padding-xsmall-down;
+    padding-right: $horizontal-padding-xsmall-down;
+  }
+}
+
+.modalHeader--bordered {
+  border-bottom: 1px solid var(--modal-content-border-color);
+  padding-bottom: $vertical-padding;
+}
+
+.modalFooter {
+  flex: none;
+  padding: $vertical-padding $horizontal-padding;
+
+  @media (--viewport-xsmall-down) {
+    padding-left: $horizontal-padding-xsmall-down;
+    padding-right: $horizontal-padding-xsmall-down;
+  }
+}
+
+.modalFooter--bordered {
+  border-top: 1px solid var(--modal-content-border-color);
+}

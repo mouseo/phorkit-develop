@@ -1,0 +1,88 @@
+.shade {
+  position: relative;
+}
+
+.shade--opaque {
+  background-color: var(--shade-opaque-primary-color);
+  border: 1px solid var(--shade-primary-color);
+  color: var(--shade-primary-color);
+
+  &.shade--unbordered {
+    border: none;
+  }
+}
+
+.shade--transparent {
+  @mixin makeShadedFill var(--shade-primary-color), withShade;
+
+  &.shade--unbordered {
+    border: none;
+  }
+}
+
+.shade--actionable {
+  @mixin makeFillerTransitions;
+  @mixin prepareFocusRing;
+  @mixin setFocusRingOpacity 0.3;
+
+  &:hover,
+  &.is-hovered {
+    @mixin makeShadedFillHover var(--shade-primary-color), var(--shade-inverse-color);
+  }
+
+  &:focus,
+  &.is-focused {
+    @mixin makeFocusRing var(--shade-primary-color);
+  }
+
+  &:active,
+  &.is-active {
+    @mixin makeFocusRing var(--shade-primary-color);
+    @mixin makeShadedFillActive var(--shade-active-primary-color), var(--shade-inverse-color);
+  }
+}
+
+.shade--success {
+  @mixin themed .shade {
+    --shade-active-primary-color: $theme-color-success-D10;
+    --shade-inverse-color: $theme-color-success-contrast;
+    --shade-opaque-primary-color: $theme-color-success-shade;
+    --shade-primary-color: $theme-color-success;
+  }
+}
+
+.shade--warning {
+  @mixin themed .shade {
+    --shade-active-primary-color: $theme-color-warning-D10;
+    --shade-inverse-color: $theme-color-warning-contrast;
+    --shade-opaque-primary-color: $theme-color-warning-shade;
+    --shade-primary-color: $theme-color-warning;
+  }
+}
+
+.shade--danger {
+  @mixin themed .shade {
+    --shade-active-primary-color: $theme-color-danger-D10;
+    --shade-inverse-color: $theme-color-danger-contrast;
+    --shade-opaque-primary-color: $theme-color-danger-shade;
+    --shade-primary-color: $theme-color-danger;
+  }
+}
+
+.shade--primary {
+  @mixin themed .shade {
+    --shade-active-primary-color: var(--phork-accent-color-D10, $theme-color-accent-D10);
+    --shade-inverse-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+    --shade-opaque-primary-color: var(--phork-accent-color-shade, $theme-color-accent-shade);
+    --shade-primary-color: var(--phork-accent-color, $theme-color-accent);
+  }
+}
+
+.shade--neutral {
+  @mixin themed .shade {
+    --shade-active-primary-color: $theme-color-neutral-D10;
+    --shade-inverse-color: $theme-color-neutral-contrast;
+    --shade-opaque-primary-color: $theme-color-neutral-shade;
+    --shade-primary-color: $theme-color-neutral;
+  }
+}

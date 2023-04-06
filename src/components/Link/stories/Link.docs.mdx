@@ -1,0 +1,19 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { Link } from '../Link';
+
+<PageTitle src="components/Link" title="Link" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <Link contrast href="https://phorkit.org" target="_blank">
+    I am a link
+  </Link>
+</Canvas>

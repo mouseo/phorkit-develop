@@ -1,0 +1,139 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Button } from 'components/Button/Button';
+import { Rhythm } from 'components/Rhythm/Rhythm';
+import { StateWrapper } from 'docs/helpers/StateWrapper';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { ColoredLineLoader } from '../ColoredLineLoader';
+import { StyledLineLoader } from '../StyledLineLoader';
+import { useLineLoader } from '../useLineLoader';
+
+<Meta
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+  title="Feedback/LineLoader/useLineLoader"
+/>
+
+<PageTitle src="components/LineLoader" title="useLineLoader" />
+
+### LineLoader
+
+<Canvas>
+  <Story name="LineLoader" parameters={{ chromatic: { disableSnapshot: true } }}>
+    {() => {
+      const { loader, onLoad, loaderFinishing } = useLineLoader({ position: 'top' });
+      return (
+        <StateWrapper initialState={false}>
+          {({ state: loaded, setState: setLoaded }) => (
+            <Rhythm grouped pt={3} style={{ position: 'relative' }}>
+              {(!loaded || loaderFinishing) && loader}
+              {!loaded && (
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    setLoaded(true);
+                    onLoad();
+                  }}
+                  shape="brick"
+                  weight="shaded"
+                >
+                  Trigger loaded state
+                </Button>
+              )}
+              {loaded && (
+                <Button disabled imitation as="div" color="neutral" shape="brick" weight="shaded">
+                  Loaded
+                </Button>
+              )}
+            </Rhythm>
+          )}
+        </StateWrapper>
+      );
+    }}
+  </Story>
+</Canvas>
+
+### ColoredLineLoader
+
+<Canvas>
+  <Story name="ColoredLineLoader" parameters={{ chromatic: { disableSnapshot: true } }}>
+    {() => {
+      const { loader, onLoad, loaderFinishing } = useLineLoader({
+        position: 'top',
+        component: ColoredLineLoader,
+        colorId: 'P20',
+      });
+      return (
+        <StateWrapper initialState={false}>
+          {({ state: loaded, setState: setLoaded }) => (
+            <Rhythm grouped pt={3} style={{ position: 'relative' }}>
+              {(!loaded || loaderFinishing) && loader}
+              {!loaded && (
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    setLoaded(true);
+                    onLoad();
+                  }}
+                  shape="brick"
+                  weight="shaded"
+                >
+                  Trigger loaded state
+                </Button>
+              )}
+              {loaded && (
+                <Button disabled imitation as="div" color="neutral" shape="brick" weight="shaded">
+                  Loaded
+                </Button>
+              )}
+            </Rhythm>
+          )}
+        </StateWrapper>
+      );
+    }}
+  </Story>
+</Canvas>
+
+### StyledLineLoader
+
+<Canvas>
+  <Story name="StyledLineLoader" parameters={{ chromatic: { disableSnapshot: true } }}>
+    {() => {
+      const { loader, onLoad, loaderFinishing } = useLineLoader({
+        position: 'top',
+        component: StyledLineLoader,
+        color: '#556270',
+      });
+      return (
+        <StateWrapper initialState={false}>
+          {({ state: loaded, setState: setLoaded }) => (
+            <Rhythm grouped pt={3} style={{ position: 'relative' }}>
+              {(!loaded || loaderFinishing) && loader}
+              {!loaded && (
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    setLoaded(true);
+                    onLoad();
+                  }}
+                  shape="brick"
+                  weight="shaded"
+                >
+                  Trigger loaded state
+                </Button>
+              )}
+              {loaded && (
+                <Button disabled imitation as="div" color="neutral" shape="brick" weight="shaded">
+                  Loaded
+                </Button>
+              )}
+            </Rhythm>
+          )}
+        </StateWrapper>
+      );
+    }}
+  </Story>
+</Canvas>

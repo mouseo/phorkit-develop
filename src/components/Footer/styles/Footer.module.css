@@ -1,0 +1,106 @@
+.footer {
+  align-items: center;
+  background-color: var(--footer-background-color);
+  color: var(--footer-text-color);
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+/**
+ * 1. Use a pseudo element rather than a border so that
+ *    it doesn't add height to the box element.
+ */
+.footer--bordered {
+  border-top: 1px solid var(--footer-border-color);
+
+  &.footer--bordered-pseudo {
+    border: none;
+
+    &:before {
+      background-color: var(--footer-border-color); /* [1] */
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: -1px;
+    }
+  }
+}
+
+.footer--primary {
+  @mixin themed .footer {
+    --footer-border-color: $theme-primary-palette-border-color;
+
+    &.footer--quiet {
+      --footer-border-color: $theme-primary-palette-quiet-border-color;
+    }
+
+    &.footer--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-primary-palette-background-color;
+    color: $theme-primary-palette-text-color;
+  }
+}
+
+.footer--secondary {
+  @mixin themed .footer {
+    --footer-border-color: $theme-secondary-palette-border-color;
+
+    &.footer--quiet {
+      --footer-border-color: $theme-secondary-palette-quiet-border-color;
+    }
+
+    &.footer--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-secondary-palette-background-color;
+    color: $theme-secondary-palette-text-color;
+  }
+}
+
+.footer--tertiary {
+  @mixin themed .footer {
+    --footer-border-color: $theme-tertiary-palette-border-color;
+
+    &.footer--quiet {
+      --footer-border-color: $theme-tertiary-palette-quiet-border-color;
+    }
+
+    &.footer--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-tertiary-palette-background-color;
+    color: $theme-tertiary-palette-text-color;
+  }
+}
+
+.footer--contrast {
+  @mixin themed .footer {
+    --footer-border-color: $theme-contrast-palette-border-color;
+
+    &.footer--quiet {
+      --footer-border-color: $theme-contrast-palette-quiet-border-color;
+    }
+
+    &.footer--transparent {
+      background-color: transparent;
+    }
+
+    background-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    color: $theme-contrast-palette-text-color;
+  }
+}
+
+.footer--full {
+  height: 100%;
+  width: 100%;
+}

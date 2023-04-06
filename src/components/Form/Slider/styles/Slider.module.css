@@ -1,0 +1,210 @@
+/**
+ * 1. Add a bit of padding to make for a friendlier
+ *    click area. Also accounts for space taken up
+ *    by the slider button.
+ */
+$vertical-padding: 8px; /* [1] */
+$track-height: 4px;
+$animation-timing: 200ms;
+
+.slider {
+  display: inline-block;
+  font-size: $font-size-medium;
+  position: relative;
+
+  &.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/**
+ * 1. The width of the divider ticks minus 1px for the space
+ *    between the track and the outline.
+ */
+.slider--noHandle {
+  &:not(.is-accessible),
+  &.is-accessible:not(.is-focused) {
+    .sliderHandle {
+      display: none;
+      pointer-events: none;
+    }
+  }
+}
+
+.sliderLabel {
+  margin-bottom: 4px;
+}
+
+/*
+.sliderValue {}
+*/
+
+.sliderValue--top {
+  position: absolute;
+  right: 0;
+  top: 2px;
+}
+
+.sliderValue--right {
+  bottom: 2px;
+  left: calc(100% + 12px);
+  position: absolute;
+}
+
+.sliderInputContainer {
+  align-items: center;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  height: 6px;
+  padding: $vertical-padding 0; /* [1] */
+  position: relative;
+  width: 100%;
+
+  &:before {
+    background: var(--slider-track-background-color);
+    border-radius: 3px;
+    bottom: calc($vertical-padding - calc($track-height / 2));
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: calc($vertical-padding - calc($track-height / 2));
+  }
+
+  &:after {
+    background: var(--slider-track-fill-background-color);
+    border-radius: 3px;
+    bottom: calc($vertical-padding - calc($track-height / 2));
+    content: '';
+    left: 0;
+    position: absolute;
+    top: calc($vertical-padding - calc($track-height / 2));
+    transition: all $animation-timing ease-in-out;
+    width: var(--slider-track-fill-width);
+  }
+
+  .slider.is-dragging & {
+    &:after {
+      transition: none;
+    }
+  }
+}
+
+.sliderHandle {
+  background-color: var(--slider-handle-background-color);
+  border-radius: 100%;
+  height: 12px;
+  left: var(--slider-track-fill-width);
+  position: absolute;
+  transform: translate(-50%);
+  transition: all $animation-timing ease-in-out;
+  width: 12px;
+  z-index: 2;
+
+  @mixin prepareFocusRing;
+  @mixin setFocusRingOpacity var(--slider-handle-focus-ring-opacity, 0.2);
+
+  .slider.is-dragging & {
+    transition: none;
+  }
+
+  .slider.is-focused &,
+  .slider:hover & {
+    @mixin makeFocusRing var(--slider-handle-background-color);
+  }
+}
+
+.sliderHandle--small {
+  height: 8px;
+  width: 8px;
+}
+
+.sliderTickContainer {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.sliderTick {
+  background-color: var(--slider-tick-background-color);
+  border-radius: 100%;
+  display: inline-block;
+  height: 8px;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  width: 8px;
+  z-index: 1;
+}
+
+.sliderTick--active {
+  background-color: var(--slider-handle-background-color);
+}
+
+input.sliderInput {
+  @mixin visuallyHidden;
+}
+
+.slider--primary {
+  @mixin themed .slider {
+    --slider-track-background-color: $theme-color-FG0-O10;
+    --slider-track-fill-background-color: var(--phork-accent-color, $theme-color-accent);
+    --slider-handle-background-color: var(--phork-accent-color, $theme-color-accent);
+    --slider-tick-background-color: $theme-color-BG50;
+  }
+
+  &.slider--dark {
+    --slider-handle-focus-ring-opacity: 0.3;
+  }
+}
+
+.slider--contrast {
+  @mixin themed .slider {
+    --slider-track-background-color: $theme-contrast-palette-quietest-color;
+    --slider-track-fill-background-color: $theme-contrast-palette-text-color;
+    --slider-handle-background-color: $theme-contrast-palette-text-color;
+    --slider-tick-background-color: $theme-contrast-palette-quiet-color;
+  }
+}
+
+.slider.is-success {
+  @mixin themed .slider {
+    --slider-track-fill-background-color: $theme-color-success;
+    --slider-handle-background-color: $theme-color-success;
+    --slider-tick-background-color: $theme-color-BG50;
+  }
+
+  &.slider--dark {
+    --slider-handle-focus-ring-opacity: 0.3;
+  }
+}
+
+.slider.is-warning {
+  @mixin themed .slider {
+    --slider-track-fill-background-color: $theme-color-warning;
+    --slider-handle-background-color: $theme-color-warning;
+    --slider-tick-background-color: $theme-color-BG50;
+  }
+
+  &.slider--dark {
+    --slider-handle-focus-ring-opacity: 0.3;
+  }
+}
+
+.slider.is-danger {
+  @mixin themed .slider {
+    --slider-track-fill-background-color: $theme-color-danger;
+    --slider-handle-background-color: $theme-color-danger;
+    --slider-tick-background-color: $theme-color-BG50;
+  }
+
+  &.slider--dark {
+    --slider-handle-focus-ring-opacity: 0.3;
+  }
+}

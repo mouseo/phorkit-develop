@@ -1,0 +1,499 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Flex } from 'components/Flex';
+import { Link } from 'components/Link';
+import { Rhythm } from 'components/Rhythm';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { Typography } from '../Typography';
+
+<PageTitle src="components/Typography" title="Typography" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+## Examples
+
+### Font sizes
+
+<Canvas>
+  <Flex direction="column">
+    <Rhythm my={1}>
+      <Typography color="primary" size="2xsmall">
+        The quick brown fox jumped over the lazy dog (2xsmall)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="xsmall">
+        The quick brown fox jumped over the lazy dog (xsmall)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="small">
+        The quick brown fox jumped over the lazy dog (small)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="medium">
+        The quick brown fox jumped over the lazy dog (medium)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="large">
+        The quick brown fox jumped over the lazy dog (large)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="xlarge">
+        The quick brown fox jumped over the lazy dog (xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="2xlarge">
+        The quick brown fox jumped over the lazy dog (2xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="3xlarge">
+        The quick brown fox jumped over the lazy dog (3xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="4xlarge">
+        The quick brown fox jumped over the lazy dog (4xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="5xlarge">
+        The quick brown fox jumped over the lazy dog (5xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="6xlarge">
+        The quick brown fox jumped over the lazy dog (6xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="7xlarge">
+        The quick brown fox jumped over the lazy dog (7xlarge)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="8xlarge">
+        The quick brown fox jumped over the lazy dog (8xlarge)
+      </Typography>
+    </Rhythm>
+  </Flex>
+</Canvas>
+
+### Font weights
+
+<Canvas>
+  <Flex direction="column">
+    <Rhythm my={1}>
+      <Typography color="primary" size="large" weight="lighter">
+        The quick brown fox jumped over the lazy dog (lighter)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="large" weight="light">
+        The quick brown fox jumped over the lazy dog (light)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="large" weight="regular">
+        The quick brown fox jumped over the lazy dog (regular)
+      </Typography>
+    </Rhythm>
+    <Rhythm my={1}>
+      <Typography color="primary" size="large" weight="bold">
+        The quick brown fox jumped over the lazy dog (bold)
+      </Typography>
+    </Rhythm>
+  </Flex>
+</Canvas>
+
+### Spaces
+
+<Canvas>
+  <Typography as="div" color="primary">
+    Hello
+    <Typography variants={['space-before']}>world</Typography>
+  </Typography>
+  <Typography as="div" color="primary">
+    <Typography variants={['space-after']}>Hello</Typography>
+    world
+  </Typography>
+  <Typography as="div" color="primary">
+    <Typography variants={['space-after', 'small-caps']}>Hello</Typography>
+    <Typography variants={['space-before', '2xlarge']}>world</Typography>
+  </Typography>
+</Canvas>
+
+### Truncated
+
+<Canvas>
+  <Typography as="div" color="primary" style={{ width: '140px' }} variants="truncated">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Align
+
+<Canvas>
+  <Flex direction="column">
+    <Typography align="left" as="div" color="primary">
+      The quick brown fox jumped over the lazy dog
+    </Typography>
+    <Typography align="center" as="div" color="primary">
+      The quick brown fox jumped over the lazy dog
+    </Typography>
+    <Typography align="right" as="div" color="primary">
+      The quick brown fox jumped over the lazy dog
+    </Typography>
+  </Flex>
+</Canvas>
+
+### Case
+
+<Canvas>
+  <Typography as="div" color="primary" variants="uppercase">
+    The uppercase fox jumped over the lazy dog
+  </Typography>
+  <Typography as="div" color="primary" variants="lowercase">
+    The LOWERCASE fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Italic
+
+<Canvas>
+  <Typography color="primary" variants="italic">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Underline
+
+<Canvas>
+  <Typography color="primary" variants="underline">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Blackout
+
+<Canvas>
+  <Typography color="primary" variants="blackout">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Blackout rounded
+
+<Canvas>
+  <Typography color="primary" variants="blackout-rounded">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Spoiler
+
+<Canvas>
+  <Typography color="primary" variants="spoiler">
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Letter spacing
+
+<Canvas>
+  <Typography as="div" color="primary">
+    This is normal letter spacing
+  </Typography>
+  <Typography as="div" color="primary" variants="letter-spacing-comfy">
+    This is comfy letter spacing
+  </Typography>
+  <Typography as="div" color="primary" variants="uppercase">
+    This is normal letter spacing
+  </Typography>
+  <Typography as="div" color="primary" variants={['letter-spacing-comfy', 'uppercase']}>
+    This is comfy letter spacing
+  </Typography>
+</Canvas>
+
+### Line heights
+
+<Canvas>
+  <Rhythm my={2} style={{ maxWidth: '400px' }}>
+    <Typography as="div" color="primary" variants="line-height-smash">
+      This is line height smash This is line height smash This is line height smash This is line height smash This is
+      line height smash This is line height smash This is line height smash
+    </Typography>
+    <Typography as="div" color="primary" variants="line-height-normal">
+      This is line height normal This is line height normal This is line height normal This is line height normal This
+      is line height normal This is line height normal This is line height normal
+    </Typography>
+    <Typography as="div" color="primary" variants="line-height-comfy">
+      This is line height comfy This is line height comfy This is line height comfy This is line height comfy This is
+      line height comfy This is line height comfy This is line height comfy
+    </Typography>
+  </Rhythm>
+</Canvas>
+
+### Quiet, Quieter, Quietest
+
+<Canvas>
+  <Typography as="div" color="primary">
+    This is a normal volume
+  </Typography>
+  <Typography as="div" color="primary" volume="quiet">
+    This is a quiet volume
+  </Typography>
+  <Typography as="div" color="primary" volume="quieter">
+    This is a quieter volume
+  </Typography>
+  <Typography as="div" color="primary" volume="quietest">
+    This is the quietest volume
+  </Typography>
+</Canvas>
+
+### Colors
+
+<Canvas>
+  <Typography as="div" color="primary">
+    Theme primary
+  </Typography>
+  <Typography as="div" color="primary" volume="quiet">
+    Theme primary quiet
+  </Typography>
+  <Typography as="div" color="primary" volume="quieter">
+    Theme primary quieter
+  </Typography>
+  <Typography as="div" color="primary" volume="quietest">
+    Theme primary quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="secondary">
+    Theme secondary
+  </Typography>
+  <Typography as="div" color="secondary" volume="quiet">
+    Theme secondary quiet
+  </Typography>
+  <Typography as="div" color="secondary" volume="quieter">
+    Theme secondary quieter
+  </Typography>
+  <Typography as="div" color="secondary" volume="quietest">
+    Theme secondary quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="tertiary">
+    Theme tertiary
+  </Typography>
+  <Typography as="div" color="tertiary" volume="quiet">
+    Theme tertiary quiet
+  </Typography>
+  <Typography as="div" color="tertiary" volume="quieter">
+    Theme tertiary quieter
+  </Typography>
+  <Typography as="div" color="tertiary" volume="quietest">
+    Theme tertiary quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="accent">
+    Theme accent
+  </Typography>
+  <Typography as="div" color="accent" volume="quiet">
+    Theme accent quiet
+  </Typography>
+  <Typography as="div" color="accent" volume="quieter">
+    Theme accent quieter
+  </Typography>
+  <Typography as="div" color="accent" volume="quietest">
+    Theme accent quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="success">
+    Theme success
+  </Typography>
+  <Typography as="div" color="success" volume="quiet">
+    Theme success quiet
+  </Typography>
+  <Typography as="div" color="success" volume="quieter">
+    Theme success quieter
+  </Typography>
+  <Typography as="div" color="success" volume="quietest">
+    Theme success quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="warning">
+    Theme warning
+  </Typography>
+  <Typography as="div" color="warning" volume="quiet">
+    Theme warning quiet
+  </Typography>
+  <Typography as="div" color="warning" volume="quieter">
+    Theme warning quieter
+  </Typography>
+  <Typography as="div" color="warning" volume="quietest">
+    Theme warning quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="danger">
+    Theme danger
+  </Typography>
+  <Typography as="div" color="danger" volume="quiet">
+    Theme danger quiet
+  </Typography>
+  <Typography as="div" color="danger" volume="quieter">
+    Theme danger quieter
+  </Typography>
+  <Typography as="div" color="danger" volume="quietest">
+    Theme danger quietest
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography as="div" color="neutral">
+    Theme neutral
+  </Typography>
+  <Typography as="div" color="neutral" volume="quiet">
+    Theme neutral quiet
+  </Typography>
+  <Typography as="div" color="neutral" volume="quieter">
+    Theme neutral quieter
+  </Typography>
+  <Typography as="div" color="neutral" volume="quietest">
+    Theme neutral quietest
+  </Typography>
+</Canvas>
+
+### Contrast
+
+<Canvas contrast>
+  <Typography as="div" color="contrast">
+    Theme contrast
+  </Typography>
+  <Typography as="div" color="contrast" volume="quiet">
+    Theme contrast quiet
+  </Typography>
+  <Typography as="div" color="contrast" volume="quieter">
+    Theme contrast quieter
+  </Typography>
+  <Typography as="div" color="contrast" volume="quietest">
+    Theme contrast quietest
+  </Typography>
+</Canvas>
+
+### Headings
+
+<Canvas>
+  <Rhythm my={2}>
+    <Typography color="primary" heading="h1">
+      The quick brown fox jumped over the lazy dog (h1)
+    </Typography>
+    <Typography color="primary" heading="h2">
+      The quick brown fox jumped over the lazy dog (h2)
+    </Typography>
+    <Typography color="primary" heading="h3">
+      The quick brown fox jumped over the lazy dog (h3)
+    </Typography>
+    <Typography color="primary" heading="h4">
+      The quick brown fox jumped over the lazy dog (h4)
+    </Typography>
+    <Typography color="primary" heading="h5">
+      The quick brown fox jumped over the lazy dog (h5)
+    </Typography>
+    <Typography color="primary" heading="h6">
+      The quick brown fox jumped over the lazy dog (h6)
+    </Typography>
+    <Typography color="primary" heading="p">
+      The quick brown fox jumped over the lazy dog The quick brown fox jumped over the lazy dog The quick brown fox
+      jumped over the lazy dog The quick brown fox jumped over the lazy dog The quick brown fox jumped over the lazy dog
+      The quick brown fox jumped over the lazy dog The quick brown fox jumped over the lazy dog The quick brown fox
+      jumped over the lazy dog (p)
+    </Typography>
+  </Rhythm>
+</Canvas>
+
+### Medium caps
+
+<Canvas>
+  <Typography color="primary" variants={['medium-caps']}>
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography color="primary" variants={['medium-caps']} volume="quiet">
+    The quiet brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Small caps
+
+<Canvas>
+  <Typography color="primary" variants={['small-caps']}>
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography color="primary" variants={['small-caps']} volume="quiet">
+    The quiet brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Extra small caps
+
+<Canvas>
+  <Typography color="primary" variants={['xsmall-caps']}>
+    The quick brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+<Canvas>
+  <Typography color="primary" variants={['xsmall-caps']} volume="quiet">
+    The quiet brown fox jumped over the lazy dog
+  </Typography>
+</Canvas>
+
+### Reset
+
+<Canvas>
+  <Typography
+    as="div"
+    color="primary"
+    style={{
+      fontSize: '14px',
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      letterSpacing: '1.5px',
+      textTransform: 'uppercase',
+    }}
+  >
+    <div>This text has not been reset.</div>
+    <Typography variants={['reset']}>The quick brown fox jumped over the lazy dog</Typography>
+  </Typography>
+</Canvas>
+
+### As link
+
+<Canvas>
+  <Typography as={Link} href="https://phorkit.org" target="_blank" volume="quiet">
+    Typography as Link
+  </Typography>
+</Canvas>

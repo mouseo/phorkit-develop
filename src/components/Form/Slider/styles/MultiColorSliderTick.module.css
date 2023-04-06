@@ -1,0 +1,13 @@
+.multiColorSliderTick {
+  border-radius: 4px;
+  width: 2px;
+  height: 8px;
+
+  &.is-inactive {
+    opacity: $opacity-quietest;
+  }
+
+  @mixin themed .multiColorSliderTick {
+    background-color: $theme-primary-palette-background-color;
+  }
+}

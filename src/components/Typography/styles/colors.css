@@ -1,0 +1,125 @@
+/**
+ * 1. Override default quiet setting which uses opacity.
+ */
+.text-color-primary {
+  @mixin themed .text {
+    color: $theme-primary-palette-text-color;
+
+    &.text-quiet {
+      color: $theme-primary-palette-quiet-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quieter {
+      color: $theme-primary-palette-quieter-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quietest {
+      color: $theme-primary-palette-quietest-color;
+      opacity: 1; /* [1] */
+    }
+  }
+}
+
+/**
+ * 1. Override default quiet setting which uses opacity.
+ */
+.text-color-secondary {
+  @mixin themed .text {
+    color: $theme-secondary-palette-text-color;
+
+    &.text-quiet {
+      color: $theme-secondary-palette-quiet-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quieter {
+      color: $theme-secondary-palette-quieter-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quietest {
+      color: $theme-secondary-palette-quietest-color;
+      opacity: 1; /* [1] */
+    }
+  }
+}
+
+/**
+ * 1. Override default quiet setting which uses opacity.
+ */
+.text-color-tertiary {
+  @mixin themed .text {
+    color: $theme-tertiary-palette-text-color;
+
+    &.text-quiet {
+      color: $theme-tertiary-palette-quiet-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quieter {
+      color: $theme-tertiary-palette-quieter-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quietest {
+      color: $theme-tertiary-palette-quietest-color;
+      opacity: 1; /* [1] */
+    }
+  }
+}
+
+/**
+ * 1. Override default quiet setting which uses opacity.
+ */
+.text-color-contrast {
+  @mixin themed .text {
+    color: $theme-contrast-palette-text-color;
+
+    &.text-quiet {
+      color: $theme-contrast-palette-quiet-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quieter {
+      color: $theme-contrast-palette-quieter-color;
+      opacity: 1; /* [1] */
+    }
+
+    &.text-quietest {
+      color: $theme-contrast-palette-quietest-color;
+      opacity: 1; /* [1] */
+    }
+  }
+}
+
+.text-color-accent {
+  @mixin themed .text {
+    color: var(--phork-accent-color, $theme-color-accent);
+  }
+}
+
+.text-color-success {
+  @mixin themed .text {
+    color: $theme-color-success;
+  }
+}
+
+.text-color-warning {
+  @mixin themed .text {
+    color: $theme-color-warning;
+  }
+}
+
+.text-color-danger {
+  @mixin themed .text {
+    color: $theme-color-danger;
+  }
+}
+
+.text-color-neutral {
+  @mixin themed .text {
+    color: $theme-color-neutral;
+  }
+}

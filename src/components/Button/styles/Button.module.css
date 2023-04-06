@@ -1,0 +1,571 @@
+button.unbutton {
+  @mixin unbutton;
+  padding: 0;
+}
+
+.unbutton {
+  color: currentColor;
+
+  &:disabled,
+  &.is-disabled {
+    cursor: default;
+    opacity: $opacity-disabled;
+    pointer-events: none;
+  }
+}
+
+/**
+ * 1. The full unbuttoning includes background, border and
+ *    text align which need to be overridden by certain classes
+ *    below. However due to the specificity here if they were
+ *    set in the unbuttoning here they wouldn't be overridable,
+ *    so this only does the minimum unbuttoning.
+ */
+button.button {
+  @mixin unbutton minimal; /* [1] */
+}
+
+/**
+ * The shared button styles - this should not include
+ * colors or sizes.
+ *
+ * 1. Don't steal the event target away from the button.
+ */
+.button {
+  @mixin button;
+  @mixin makeFillerBase;
+
+  align-items: center;
+  background: transparent;
+  border: none;
+  display: inline-flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: center;
+  letter-spacing: 0.25px;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled,
+  &.is-disabled,
+  &.is-loading {
+    opacity: $opacity-disabled;
+    pointer-events: none;
+  }
+
+  &.is-loading {
+    cursor: 'wait';
+  }
+
+  > * {
+    pointer-events: none; /* [1] */
+  }
+}
+
+.button--imitation {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Button weights (these should go before other defs) */
+
+.button--solid {
+  @mixin makeSolidFill var(--button-primary-color), var(--button-inverse-color);
+
+  &:not(:disabled):not(.is-disabled) {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin setFocusRingOpacity 0.3;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeSolidFillHover var(--button-hovered-primary-color), var(--button-inverse-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--button-primary-color), var(--button-focus-ring-size, 4px);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeSolidFillActive var(--button-active-primary-color), var(--button-inverse-color);
+    }
+  }
+}
+
+.button--shaded {
+  @mixin makeShadedFill var(--button-primary-color), withShade;
+
+  &:not(:disabled):not(.is-disabled) {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin setFocusRingOpacity 0.3;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeShadedFillHover var(--button-primary-color), var(--button-inverse-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--button-primary-color), var(--button-focus-ring-size, 4px);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeFocusRing var(--button-primary-color), var(--button-focus-ring-size, 4px);
+      @mixin makeShadedFillActive var(--button-active-primary-color), var(--button-inverse-color);
+    }
+  }
+}
+
+.button--outlined {
+  @mixin makeOutlinedFill var(--button-primary-color);
+
+  &:not(:disabled):not(.is-disabled) {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin setFocusRingOpacity 0.3;
+    @mixin prepareShade;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeOutlinedFillHover var(--button-primary-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--button-primary-color), var(--button-focus-ring-size, 4px);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeOutlinedFillActive var(--button-active-primary-color);
+    }
+  }
+}
+
+.button--ghost {
+  @mixin makeGhostFill var(--button-primary-color);
+
+  &:not(:disabled):not(.is-disabled) {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin setFocusRingOpacity 0.3;
+    @mixin prepareShade withBorder;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeGhostFillHover var(--button-primary-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--button-primary-color), var(--button-focus-ring-size, 4px);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeGhostFillActive var(--button-active-primary-color);
+    }
+  }
+}
+
+.button--inline {
+  border-radius: 0;
+  color: var(--button-primary-color);
+  margin: 0;
+  padding: 0;
+
+  &:after {
+    border-bottom: 1px solid transparent;
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0.1rem;
+    left: -0.1rem;
+    right: -0.1rem;
+    transition: border-color 150ms ease, transform 200ms ease;
+    transform: scaleX(0);
+  }
+
+  &.button--icon {
+    &:after {
+      top: 4px;
+    }
+  }
+
+  &:not(:disabled):not(.is-disabled) {
+    &:hover,
+    &.is-hovered {
+      opacity: 0.8;
+    }
+
+    &:focus,
+    &.is-focused {
+      &:after {
+        border-color: currentColor;
+        transform: scaleX(1);
+      }
+    }
+
+    &:active,
+    &.is-active {
+      color: var(--button-active-primary-color);
+      opacity: 1;
+    }
+  }
+}
+
+/* Button shapes */
+
+.button--pill {
+  border-radius: 20px;
+}
+
+/**
+ * 1. Override the inherited border radius from
+ *    the mixin. This must be defined after the
+ *    mixin has been called.
+ */
+.button--brick {
+  border-radius: $border-radius-medium;
+
+  &:before,
+  &:after {
+    border-radius: 1px; /* [1] */
+  }
+}
+
+/* Button sizes */
+
+/**
+ * It's important set the button padding using this:
+ *
+ *  :not(.button--noPadding) {
+ *    padding: ...
+ *  }
+ *
+ * rather than .button--noPadding { padding: 0 }
+ * because this allows another component to use their
+ * own className on the button to set custom padding.
+ * Otherwise a class like `.button--noPadding` could
+ * overwrite the component's custom paddng.
+ */
+
+.button--small {
+  font-size: $font-size-small;
+
+  &:not(.button--noHeight) {
+    min-height: $element-height-small;
+
+    &.button--icon {
+      width: $element-height-small;
+    }
+  }
+
+  &:not(.button--noPadding) {
+    padding: 0.5em 1.6em;
+
+    &.button--iconText {
+      padding-left: 1.2em;
+    }
+
+    &.button--iconTextReverse {
+      padding-right: 1.2em;
+    }
+  }
+}
+
+.button--medium {
+  font-size: $font-size-medium;
+
+  &:not(.button--noHeight) {
+    min-height: $element-height-medium;
+
+    &.button--icon {
+      width: $element-height-medium;
+    }
+  }
+
+  &:not(.button--noPadding) {
+    padding: 0.4em 1.8em;
+
+    &.button--iconText {
+      padding-left: 1.4em;
+    }
+
+    &.button--iconTextReverse {
+      padding-right: 1.4em;
+    }
+  }
+}
+
+.button--large {
+  font-size: $font-size-large;
+
+  &:not(.button--noHeight) {
+    min-height: $element-height-large;
+
+    &.button--icon {
+      width: $element-height-large;
+    }
+  }
+
+  &:not(.button--noPadding) {
+    padding: 0.4em 2.2em;
+
+    &.button--iconText {
+      padding-left: 1.6em;
+    }
+
+    &.button--iconTextReverse {
+      padding-right: 1.6em;
+    }
+  }
+}
+
+/* Icon button sizes can exceed regular button sizes */
+
+.button--xlarge {
+  font-size: $font-size-xlarge;
+  height: $element-height-xlarge;
+  width: $element-height-xlarge;
+
+  --button-focus-ring-size: 5px;
+}
+
+.button--2xlarge {
+  font-size: $font-size-2xlarge;
+  height: $element-height-2xlarge;
+  width: $element-height-2xlarge;
+
+  --button-focus-ring-size: 5px;
+}
+
+.button--3xlarge {
+  font-size: $font-size-3xlarge;
+  height: $element-height-3xlarge;
+  width: $element-height-3xlarge;
+
+  --button-focus-ring-size: 5px;
+}
+
+.button--4xlarge {
+  font-size: $font-size-4xlarge;
+  height: $element-height-4xlarge;
+  width: $element-height-4xlarge;
+
+  --button-focus-ring-size: 6px;
+}
+
+.button--5xlarge {
+  font-size: $font-size-5xlarge;
+  height: $element-height-5xlarge;
+  width: $element-height-5xlarge;
+
+  --button-focus-ring-size: 6px;
+}
+
+/* A general catch-all button size */
+
+.button--relative {
+  font-size: 1em;
+
+  &:not(.button--noHeight) {
+    min-height: 2em;
+  }
+
+  &:not(.button--noPadding) {
+    padding: 0.4em 1.6em;
+  }
+}
+
+/* Icon buttons */
+
+.button--icon {
+  &.button--pill {
+    border-radius: 100%;
+  }
+
+  &.button--pill,
+  &.button--brick {
+    padding: 0;
+  }
+}
+
+.button--iconText,
+.button--iconTextReverse {
+  &.button--inline {
+    padding-bottom: 0.2em;
+  }
+
+  .button__icon {
+    line-height: 1;
+  }
+
+  .button__text {
+    white-space: nowrap;
+  }
+}
+
+.button--iconText {
+  .button__icon {
+    margin-right: 8px;
+  }
+}
+
+.button--iconTextReverse {
+  .button__content {
+    flex-direction: row-reverse;
+  }
+
+  .button__icon {
+    margin-left: 12px;
+  }
+}
+
+/**
+ * 1. Remove extra space added to the bottom.
+ */
+.button--icon svg,
+.button--iconText .button__icon svg,
+.button--iconTextReverse .button__icon svg {
+  float: left; /* [1] */
+}
+
+/* Button extras */
+
+.button--noPadding {
+  padding: 0;
+}
+
+.button--fullWidth {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.button--success {
+  @mixin themed .button {
+    --button-primary-color: $theme-color-success;
+    --button-inverse-color: $theme-color-success-contrast;
+    --button-hovered-primary-color: $theme-color-success-L10;
+    --button-active-primary-color: $theme-color-success-D10;
+  }
+}
+
+.button--warning {
+  @mixin themed .button {
+    --button-primary-color: $theme-color-warning;
+    --button-inverse-color: $theme-color-warning-contrast;
+    --button-hovered-primary-color: $theme-color-warning-L10;
+    --button-active-primary-color: $theme-color-warning-D10;
+  }
+}
+
+.button--danger {
+  @mixin themed .button {
+    --button-primary-color: $theme-color-danger;
+    --button-inverse-color: $theme-color-danger-contrast;
+    --button-hovered-primary-color: $theme-color-danger-L10;
+    --button-active-primary-color: $theme-color-danger-D10;
+  }
+}
+
+.button--primary {
+  @mixin themed .button {
+    --button-primary-color: var(--phork-accent-color, $theme-color-accent);
+    --button-inverse-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+    --button-hovered-primary-color: var(--phork-accent-color-L10, $theme-color-accent-L10);
+    --button-active-primary-color: var(--phork-accent-color-D10, $theme-color-accent-D10);
+  }
+}
+
+.button--contrast {
+  @mixin themed .button {
+    --button-primary-color: $theme-contrast-palette-text-color;
+    --button-inverse-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    --button-hovered-primary-color: $theme-contrast-palette-quiet-color;
+    --button-active-primary-color: $theme-contrast-palette-text-color;
+  }
+}
+
+.button--neutral,
+.button--neutralAndPrimary {
+  @mixin themed .button {
+    --button-primary-color: $theme-color-neutral;
+    --button-inverse-color: $theme-color-neutral-contrast;
+    --button-hovered-primary-color: $theme-color-neutral-L10;
+    --button-active-primary-color: $theme-color-neutral-D10;
+  }
+}
+
+.button--neutralAndPrimary {
+  @mixin themed .button {
+    &:not(:disabled):not(.is-disabled) {
+      &:focus,
+      &.is-focused {
+        --button-primary-color: var(--phork-accent-color, $theme-color-accent);
+        --button-inverse-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+      }
+    }
+  }
+}
+
+.button--white {
+  --button-primary-color: #fff;
+  --button-inverse-color: #000;
+  --button-hovered-primary-color: rgba(255, 255, 255, 0.8);
+  --button-active-primary-color: rgba(255, 255, 255, 0.6);
+}
+
+.button--black {
+  --button-primary-color: #000;
+  --button-inverse-color: #fff;
+  --button-hovered-primary-color: rgba(0, 0, 0, 0.8);
+  --button-active-primary-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Button children */
+
+.button__content {
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: center;
+  white-space: nowrap;
+  width: 100%;
+
+  .button--left & {
+    justify-content: flex-start;
+  }
+
+  .button--right & {
+    justify-content: flex-end;
+  }
+
+  button.is-loading & {
+    visibility: hidden;
+  }
+}
+
+.button__loader {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

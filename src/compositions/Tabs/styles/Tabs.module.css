@@ -1,0 +1,253 @@
+@import '../../../styles/common/mixins/addScrollbar.css';
+
+.tabList {
+  @mixin addSmallScrollbar var(--tab-list-scrollbar-thumb-color), transparent;
+
+  align-items: center;
+  background-color: var(--tab-background-color);
+  color: var(--tab-text-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+
+  &:focus,
+  &.is-focused {
+    outline: none;
+  }
+}
+
+.tabList--primary {
+  @mixin themed .tabList {
+    --tab-background-color: $theme-tertiary-palette-background-color;
+    --tab-focused-text-color: var(--phork-accent-color, $theme-color-accent);
+    --tab-selected-background-color: $theme-primary-palette-background-color;
+    --tab-selected-text-color: $theme-primary-palette-text-color;
+    --tab-text-color: $theme-secondary-palette-quiet-color;
+    --tab-list-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+  }
+}
+
+.tabList--transparent {
+  @mixin themed .tabList {
+    --tab-background-color: transparent;
+    --tab-focused-text-color: var(--phork-accent-color-D10, $theme-color-accent-D10);
+    --tab-selected-background-color: transparent;
+    --tab-selected-text-color: var(--phork-accent-color, $theme-color-accent);
+    --tab-text-color: currentColor;
+    --tab-list-scrollbar-thumb-color: $theme-primary-scrollbar-thumb-color;
+  }
+}
+
+.tabList--contrast {
+  @mixin themed .tabList {
+    --tab-background-color: $theme-color-BG0-O5;
+    --tab-focused-text-color: $theme-contrast-palette-text-color;
+    --tab-selected-background-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    --tab-selected-text-color: $theme-contrast-palette-quiet-color;
+    --tab-text-color: $theme-contrast-palette-quiet-color;
+    --tab-list-scrollbar-thumb-color: $theme-contrast-scrollbar-thumb-color;
+  }
+}
+
+/**
+ * 1. Match the tab border radius so the background color
+ *    won't overflow.
+ * 2. Remove the tab radius for the first child.
+ * 3. Remove the external tab radius for the last child
+ *    only when in full width model.
+ */
+.tabList--horizontal {
+  border-top-left-radius: $border-radius-small; /* [1] */
+  border-top-right-radius: $border-radius-small; /* [1] */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &:not(.tabList--colored)&:not(.tabList--transparent) {
+    .tab {
+      &.is-selected {
+        &:before {
+          @mixin externalTabRadius var(--tab-selected-background-color), 4, bottom, left;
+        }
+
+        &:after {
+          @mixin externalTabRadius var(--tab-selected-background-color), 4, bottom, right;
+        }
+      }
+    }
+  }
+
+  > .tab.is-selected:first-child:before {
+    display: none; /* [2] */
+  }
+
+  &.tabList--fullWidth {
+    > .tab.is-selected:last-child:after {
+      display: none; /* [3] */
+    }
+  }
+}
+
+/**
+ * 1. Match the tab border radius so the background color
+ *    won't overflow.
+ */
+.tabList--vertical {
+  border-top-left-radius: $border-radius-small; /* [1] */
+  border-bottom-left-radius: $border-radius-small; /* [1] */
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.tabList--fullWidth {
+  .tab {
+    flex: 1;
+  }
+}
+
+button.tab {
+  @mixin unbutton minimal;
+
+  &:active {
+    outline: none;
+  }
+}
+
+/**
+ * 1. Raise the selected tab so the corners are on top.
+ */
+.tab {
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+  user-select: none;
+
+  &.is-selected {
+    background-color: var(--tab-selected-background-color);
+    color: var(--tab-selected-text-color);
+    z-index: 1; /* [1] */
+  }
+
+  .tabList:not(.is-accessible) & {
+    &:hover,
+    &.is-hovered {
+      color: var(--tab-focused-text-color);
+    }
+  }
+
+  .tabList--colored:not(.is-accessible) & {
+    &:hover,
+    &.is-hovered {
+      background-color: var(--tab-focused-background-color);
+    }
+  }
+
+  /**
+   * 1. Purposefully exclude :focus here because the browser
+   *    focus is no longer relevant in accessible mode.
+   */
+  .tabList.is-accessible:focus &,
+  .tabList.is-accessible.is-focused & {
+    &.is-focused {
+      /* [1] */
+      color: var(--tab-focused-text-color);
+    }
+  }
+
+  .tabList--colored.is-accessible:focus &,
+  .tabList--colored.is-accessible.is-focused & {
+    &.is-focused {
+      background-color: var(--tab-focused-background-color);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled,
+  &.is-disabled {
+    pointer-events: none;
+
+    & > .tab__content {
+      opacity: $opacity-disabled;
+    }
+  }
+}
+
+.tab--horizontal {
+  border-bottom: none;
+  border-top-left-radius: $border-radius-small;
+  border-top-right-radius: $border-radius-small;
+  min-height: $element-height-medium;
+  padding: 8px 30px;
+
+  .tabList--colored & {
+    border-radius: 0;
+  }
+}
+
+/**
+ * Vertical dividers between unselected tabs in horizontal
+ * mode to be shown conditionally based on select or selected
+ * and hover states.
+ */
+.tab--horizontal:not(:first-child) {
+  &:after {
+    background-color: var(--tab-text-color);
+    content: '';
+    height: 50%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 150ms ease;
+    width: 1px;
+  }
+}
+
+.tabList--transparent .tab--horizontal,
+.tabList--colored
+  .tab--horizontal:not(.is-selected):not(.is-hovered):not(:hover)
+  + .tab--horizontal:not(.is-selected):not(.is-hovered):not(:hover),
+.tabList:not(.tabList--colored) .tab--horizontal:not(.is-selected) + .tab--horizontal:not(.is-selected) {
+  &:after {
+    opacity: 0.3;
+  }
+}
+
+.tab--vertical {
+  border-right: none;
+  flex: none;
+  justify-content: flex-start;
+  line-height: normal;
+  padding: 8px 20px;
+  width: 100%;
+
+  &.tab--icon {
+    min-width: 36px;
+    padding: 10px;
+  }
+}
+
+.tab a {
+  color: currentColor;
+  outline: none;
+}
+
+.tab__content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}

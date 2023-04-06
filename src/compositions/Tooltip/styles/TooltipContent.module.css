@@ -1,0 +1,134 @@
+.tooltipContent {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.tooltipContent__triangle {
+  position: absolute;
+  z-index: 1;
+
+  /* triangle: top */
+  .tooltipContent--bottomLeft & {
+    margin-top: calc(-1 * var(--triangle-size));
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+  }
+
+  /* triangle: top */
+  .tooltipContent--bottomCenter & {
+    left: 50%;
+    margin-top: calc(-1 * var(--triangle-size));
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  /* triangle: top */
+  .tooltipContent--bottomRight & {
+    left: 0;
+    margin-top: calc(-1 * var(--triangle-size));
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  /* triangle: bottom */
+  .tooltipContent--topLeft & {
+    bottom: 0;
+    margin-bottom: calc(-1 * var(--triangle-size));
+    right: 0;
+    transform: translateX(50%);
+  }
+
+  /* triangle: bottom */
+  .tooltipContent--topCenter & {
+    bottom: 0;
+    left: 50%;
+    margin-bottom: calc(-1 * var(--triangle-size));
+    transform: translateX(-50%);
+  }
+
+  /* triangle: bottom */
+  .tooltipContent--topRight & {
+    bottom: 0;
+    left: 0;
+    margin-bottom: calc(-1 * var(--triangle-size));
+    transform: translateX(-50%);
+  }
+
+  /* triangle: right */
+  .tooltipContent--leftTop:not(.tooltipContent--cornerTriangle) & {
+    margin-right: calc(-1 * var(--triangle-size));
+    right: 0;
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  /* triangle: top-left */
+  .tooltipContent--leftTop.tooltipContent--cornerTriangle & {
+    margin-right: calc(-2 * var(--triangle-size));
+    right: 0;
+    top: 0;
+  }
+
+  /* triangle: right */
+  .tooltipContent--leftCenter & {
+    margin-right: calc(-1 * var(--triangle-size));
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* triangle: right */
+  .tooltipContent--leftBottom:not(.tooltipContent--cornerTriangle) & {
+    bottom: 0;
+    margin-right: calc(-1 * var(--triangle-size));
+    right: 0;
+    transform: translateY(50%);
+  }
+
+  /* triangle: bottom-left */
+  .tooltipContent--leftBottom.tooltipContent--cornerTriangle & {
+    bottom: 0;
+    margin-right: calc(-2 * var(--triangle-size));
+    right: 0;
+  }
+
+  /* triangle: left */
+  .tooltipContent--rightTop:not(.tooltipContent--cornerTriangle) & {
+    left: 0;
+    margin-left: calc(-1 * var(--triangle-size));
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  /* triangle: top-right */
+  .tooltipContent--rightTop.tooltipContent--cornerTriangle & {
+    left: 0;
+    margin-left: calc(-2 * var(--triangle-size));
+    top: 0;
+  }
+
+  /* triangle: left */
+  .tooltipContent--rightCenter & {
+    left: 0;
+    margin-left: calc(-1 * var(--triangle-size));
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* triangle: left */
+  .tooltipContent--rightBottom:not(.tooltipContent--cornerTriangle) & {
+    bottom: 0;
+    left: 0;
+    margin-left: calc(-1 * var(--triangle-size));
+    transform: translateY(50%);
+  }
+
+  /* triangle: bottom-right */
+  .tooltipContent--rightBottom.tooltipContent--cornerTriangle & {
+    bottom: 0;
+    left: 0;
+    margin-left: calc(-2 * var(--triangle-size));
+  }
+}

@@ -1,0 +1,106 @@
+.header {
+  align-items: center;
+  background-color: var(--header-background-color);
+  color: var(--header-text-color);
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+/**
+ * 1. Use a pseudo element rather than a border so that
+ *    it doesn't add height to the box element.
+ */
+.header--bordered {
+  border-bottom: 1px solid var(--header-border-color);
+
+  &.header--bordered-pseudo {
+    border: none;
+
+    &:before {
+      background-color: var(--header-border-color); /* [1] */
+      bottom: -1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.header--primary {
+  @mixin themed .header {
+    --header-border-color: $theme-primary-palette-border-color;
+
+    &.header--quiet {
+      --header-border-color: $theme-primary-palette-quiet-border-color;
+    }
+
+    &.header--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-primary-palette-background-color;
+    color: $theme-primary-palette-text-color;
+  }
+}
+
+.header--secondary {
+  @mixin themed .header {
+    --header-border-color: $theme-secondary-palette-border-color;
+
+    &.header--quiet {
+      --header-border-color: $theme-secondary-palette-quiet-border-color;
+    }
+
+    &.header--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-secondary-palette-background-color;
+    color: $theme-secondary-palette-text-color;
+  }
+}
+
+.header--tertiary {
+  @mixin themed .header {
+    --header-border-color: $theme-tertiary-palette-border-color;
+
+    &.header--quiet {
+      --header-border-color: $theme-tertiary-palette-quiet-border-color;
+    }
+
+    &.header--transparent {
+      background-color: transparent;
+    }
+
+    background-color: $theme-tertiary-palette-background-color;
+    color: $theme-tertiary-palette-text-color;
+  }
+}
+
+.header--contrast {
+  @mixin themed .header {
+    --header-border-color: $theme-contrast-palette-border-color;
+
+    &.header--quiet {
+      --header-border-color: $theme-contrast-palette-quiet-border-color;
+    }
+
+    &.header--transparent {
+      background-color: transparent;
+    }
+
+    background-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    color: $theme-contrast-palette-text-color;
+  }
+}
+
+.header--full {
+  height: 100%;
+  width: 100%;
+}

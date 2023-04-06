@@ -1,0 +1,213 @@
+.tagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: -4px;
+
+  > .tag {
+    margin: 4px;
+  }
+}
+
+button.tag {
+  @mixin unbutton minimal;
+}
+
+.tag {
+  @mixin makeFillerBase;
+
+  align-items: center;
+  background: transparent;
+  display: inline-flex;
+  flex-direction: row;
+  flex: none;
+  justify-content: center;
+  letter-spacing: 0.25px;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.tag--solid {
+  @mixin makeSolidFill var(--tag-primary-color), var(--tag-inverse-color);
+
+  &.tag--actionable {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeSolidFillHover var(--tag-hovered-primary-color), var(--tag-inverse-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--tag-primary-color);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeSolidFillActive var(--tag-active-primary-color), var(--tag-inverse-color);
+    }
+  }
+}
+
+.tag--shaded {
+  @mixin makeShadedFill var(--tag-primary-color), withShade;
+
+  &.tag--actionable {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeShadedFillHover var(--tag-primary-color), var(--tag-inverse-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--tag-primary-color);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeFocusRing var(--tag-primary-color);
+      @mixin makeShadedFillActive var(--tag-active-primary-color), var(--tag-inverse-color);
+    }
+  }
+}
+
+.tag--outlined {
+  @mixin makeOutlinedFill var(--tag-primary-color);
+
+  &.tag--actionable {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin prepareShade;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeOutlinedFillHover var(--tag-primary-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--tag-primary-color);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeOutlinedFillActive var(--tag-active-primary-color);
+    }
+  }
+}
+
+.tag--ghost {
+  @mixin makeGhostFill var(--tag-primary-color);
+
+  &.tag--actionable {
+    @mixin makeFillerTransitions;
+    @mixin prepareFocusRing;
+    @mixin prepareShade withBorder;
+
+    &:hover,
+    &.is-hovered {
+      @mixin makeGhostFillHover var(--tag-primary-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--tag-primary-color);
+    }
+
+    &:active,
+    &.is-active {
+      @mixin makeGhostFillActive var(--tag-active-primary-color);
+    }
+  }
+}
+
+.tag--actionable {
+  cursor: pointer;
+}
+
+.tag--2xsmall {
+  font-size: $font-size-2xsmall;
+  height: $element-height-2xsmall;
+  line-height: 1.3em;
+  padding: 0.5em 1.2em;
+}
+
+.tag--xsmall {
+  font-size: $font-size-xsmall;
+  height: $element-height-xsmall;
+  line-height: 1.3em;
+  padding: 0.5em 1.4em;
+}
+
+.tag--small {
+  font-size: $font-size-small;
+  height: $element-height-small;
+  line-height: 1.3em;
+  padding: 0.5em 1.4em;
+}
+
+.tag--medium {
+  font-size: $font-size-medium;
+  height: $element-height-medium;
+  line-height: 1.3em;
+  padding: 0.4em 2em;
+}
+
+.tag--large {
+  font-size: $font-size-large;
+  height: $element-height-large;
+  line-height: 1.3em;
+  padding: 0.4em 2.2em;
+}
+
+.tag--flush {
+  &.tag--2xsmall,
+  &.tag--xsmall,
+  &.tag--small,
+  &.tag--medium,
+  &.tag--large {
+    padding: 0;
+  }
+}
+
+.tag--pill {
+  border-radius: 20px;
+}
+
+.tag--brick {
+  border-radius: $border-radius-medium;
+
+  &:before,
+  &:after {
+    border-radius: 1px;
+  }
+}
+
+.tag--primary {
+  @mixin themed .tag {
+    --tag-primary-color: $theme-primary-palette-quiet-color;
+    --tag-inverse-color: $theme-extreme-palette-background-color;
+    --tag-active-primary-color: $theme-primary-palette-text-color;
+    --tag-hovered-primary-color: $theme-primary-palette-quieter-color;
+  }
+}
+
+.tag--contrast {
+  @mixin themed .tag {
+    --tag-primary-color: $theme-contrast-palette-text-color;
+    --tag-inverse-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    --tag-hovered-primary-color: $theme-contrast-palette-quiet-color;
+    --tag-active-primary-color: $theme-contrast-palette-text-color;
+  }
+}

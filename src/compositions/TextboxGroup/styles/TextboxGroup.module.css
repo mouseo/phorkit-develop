@@ -1,0 +1,24 @@
+/*
+.textboxGroup {
+}
+*/
+
+.textboxGroup--2fa {
+  margin-left: calc(-1 * var(--textbox-group-input-spacing, 8px));
+  margin-right: calc(-1 * var(--textbox-group-input-spacing, 8px));
+
+  &.textboxGroup--filled,
+  &.textboxGroup--outline {
+    margin-top: 2px;
+  }
+}
+
+/*
+.textboxGroupInput {
+}
+*/
+
+.textboxGroupInput--2fa {
+  margin-left: var(--textbox-group-input-spacing, 8px);
+  margin-right: var(--textbox-group-input-spacing, 8px);
+}

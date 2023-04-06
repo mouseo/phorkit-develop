@@ -1,0 +1,44 @@
+name: Storybook
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Add tracking code
+        run: |
+          echo "${{ secrets.TRACKING_CODE }}" >> .storybook/preview-body.html
+          echo "${{ secrets.TRACKING_CODE }}" >> .storybook/manager-head.html
+
+      - name: Build storybook
+        run: |
+          yarn test-output
+          yarn build-storybook
+        env:
+          STORYBOOK_URL: https://phorkit.org
+
+      - name: Deploy storybook
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avz --delete
+          path: build/storybook
+          remote_path: ./phorkit/
+          remote_host: phork.org
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}

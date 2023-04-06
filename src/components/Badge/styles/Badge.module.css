@@ -1,0 +1,226 @@
+/**
+ * 1. Badges usually go on top of things.
+ * 2. Add transitions for when a badge changes from
+ *    a dot to a marker, for example. Or from danger
+ *    to success.
+ */
+.badge {
+  align-items: center;
+  background-color: var(--badge-background-color);
+  color: var(--badge-text-color);
+  display: inline-flex;
+  flex: none;
+  flex-direction: row;
+  font-size: $font-size-2xsmall;
+  font-weight: 700;
+  justify-content: center;
+  position: relative;
+  transition-duration: 300ms; /* [1] */
+  transition-property: width, height, background-color; /* [1] */
+  transition-timing-function: ease-in-out; /* [1] */
+  user-select: none;
+  white-space: nowrap;
+  z-index: 5; /* [1] */
+}
+
+/**
+ * The transform used for the pulsing animation
+ * creates a new stacking content so this puts
+ * the badge content in that same stacking context
+ * and prevents the animation from being overlaid.
+ */
+.badge__content {
+  transform: scale(1);
+}
+
+.badge--outlined {
+  box-shadow: 0 0 0 1px currentColor;
+}
+
+.badge--marker {
+  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+}
+
+.badge--point {
+  border-radius: 100%;
+  width: 4px;
+  height: 4px;
+}
+
+/**
+ * 1. Set an arbitrarily large border radius
+ *    to force the badge into pill or circle
+ *    format. Note that 100% will not work.
+ */
+.badge--count {
+  border-radius: 40px; /* [1] */
+  min-height: $element-height-xsmall;
+  min-width: $element-height-xsmall;
+  padding: 4px;
+}
+
+.badge--label {
+  border-radius: $border-radius-small;
+  height: 1.7em;
+  padding: 2px 8px;
+}
+
+.badge--topLeft {
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.badge--topRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+}
+
+.badge--bottomLeft {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  transform: translate(-50%, 50%);
+}
+
+.badge--bottomRight {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+.badge--success {
+  @mixin themed .badge {
+    --badge-background-color: $theme-color-success;
+    --badge-text-color: $theme-color-success-contrast;
+  }
+}
+
+.badge--warning {
+  @mixin themed .badge {
+    --badge-background-color: $theme-color-warning;
+    --badge-text-color: $theme-color-warning-contrast;
+  }
+}
+
+.badge--danger {
+  @mixin themed .badge {
+    --badge-background-color: $theme-color-danger;
+    --badge-text-color: $theme-color-danger-contrast;
+  }
+}
+
+.badge--primary {
+  @mixin themed .badge {
+    --badge-background-color: var(--phork-accent-color, $theme-color-accent);
+    --badge-text-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+  }
+}
+
+.badge--contrast {
+  @mixin themed .badge {
+    --badge-background-color: $theme-contrast-palette-text-color;
+    --badge-text-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+  }
+}
+
+.badge--neutral {
+  @mixin themed .badge {
+    --badge-background-color: $theme-color-neutral;
+    --badge-text-color: $theme-color-neutral-contrast;
+  }
+}
+
+/**
+ * The default pulsing animation.
+ */
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  80% {
+    transform: scale(1.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/**
+ * The animation for the point badge is larger than
+ * the default animation.
+ */
+@keyframes pulse-marker {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  80% {
+    transform: scale(2.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+/**
+ * The animation for the point badge is darker and
+ * larger than the default animation.
+ */
+@keyframes pulse-point {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  80% {
+    transform: scale(3.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(3.5);
+  }
+}
+
+.badge--pulsing {
+  &:before {
+    animation: pulse 2s infinite;
+    background-color: var(--badge-background-color);
+    border-radius: inherit;
+    bottom: 0;
+    content: '';
+    flex: none;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: scale(1);
+  }
+
+  &.badge--marker {
+    &:before {
+      animation: pulse-marker 2s infinite;
+    }
+  }
+
+  &.badge--point {
+    &:before {
+      animation: pulse-point 2s infinite;
+    }
+  }
+}

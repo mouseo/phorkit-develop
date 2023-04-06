@@ -1,0 +1,48 @@
+import { action } from '@storybook/addon-actions';
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Looper } from 'components/Looper';
+import { Rhythm } from 'components/Rhythm';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { FormComponentDemo } from '../../stories/helpers/FormComponentDemo';
+import { NotifiedRadioGroup } from '../NotifiedRadioGroup';
+import { RadioGroup } from '../RadioGroup';
+import { radios } from './helpers/options';
+
+<PageTitle src="components/Form/Radio" title="RadioGroup" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <FormComponentDemo initialValue="one" property="value" type="radio">
+    <RadioGroup contrast legend="Super fantastic label" radios={radios} value="one" />
+  </FormComponentDemo>
+</Canvas>
+
+## Notifications
+
+<Canvas>
+  <Looper
+    list={['danger', 'warning', 'success', 'primary', 'neutral']}
+    render={level => (
+      <Rhythm grouped mb={4}>
+        <FormComponentDemo initialValue="one" property="value" type="radio">
+          <NotifiedRadioGroup
+            layout="inline"
+            legend="Super fantastic legend"
+            level={level}
+            notification={`This is an example ${level} notification.`}
+            onChange={action('changed')}
+            radios={radios}
+            value="one"
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>

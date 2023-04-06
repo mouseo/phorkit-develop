@@ -1,0 +1,37 @@
+.tabPanelGroup {
+  background-color: var(--tab-panel-group-background-color);
+  color: var(--tab-panel-group-text-color);
+  position: relative;
+  width: 100%;
+}
+
+.tabPanelGroup--horizontal {
+  border-bottom-left-radius: $border-radius-small;
+  border-bottom-right-radius: $border-radius-small;
+}
+
+.tabPanelGroup--vertical {
+  border-bottom-right-radius: $border-radius-small;
+  border-top-right-radius: $border-radius-small;
+}
+
+.tabPanelGroup--primary {
+  @mixin themed .tabPanelGroup {
+    background-color: $theme-primary-palette-background-color;
+    color: $theme-primary-palette-text-color;
+  }
+}
+
+.tabPanelGroup--transparent {
+  @mixin themed .tabPanelGroup {
+    background-color: transparent;
+    color: $theme-primary-palette-text-color;
+  }
+}
+
+.tabPanelGroup--contrast {
+  @mixin themed .tabPanelGroup {
+    background-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+    color: var(--phork-contrast-color, $theme-contrast-palette-text-color);
+  }
+}

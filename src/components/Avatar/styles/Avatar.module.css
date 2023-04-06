@@ -1,0 +1,159 @@
+/**
+ * 1. The full unbuttoning includes background color which will
+ *    break the avatar so this only does the minimal unbuttoning.
+ */
+button.avatar {
+  @mixin unbutton minimal; /* [1] */
+
+  border: none;
+}
+
+.avatar {
+  align-items: center;
+  background-color: var(--avatar-background-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  color: var(--avatar-text-color);
+  display: flex;
+  flex: none;
+  font-size: 16px;
+  justify-content: center;
+  line-height: 0;
+  margin: 0;
+  position: relative;
+  user-select: none;
+}
+
+.avatar--actionable {
+  border: none;
+
+  @mixin prepareFocusRing;
+
+  &:focus,
+  &:hover {
+    @mixin makeFocusRing var(--avatar-actionable-background-color, var(--avatar-background-color)),
+      var(--avatar-focus-ring-size, 4px);
+    @mixin setFocusRingOpacity var(--avatar-focus-ring-opacity, 0.2);
+  }
+
+  &:active {
+    @mixin setFocusRingOpacity 0.4;
+  }
+}
+
+.avatar--xsmall {
+  --avatar-focus-ring-size: 3px;
+
+  font-size: $font-size-2xsmall;
+  height: $element-height-xsmall;
+  width: $element-height-xsmall;
+}
+
+.avatar--small {
+  font-size: $font-size-small;
+  height: $element-height-small;
+  width: $element-height-small;
+}
+
+.avatar--medium {
+  font-size: $font-size-medium;
+  height: $element-height-medium;
+  width: $element-height-medium;
+}
+
+.avatar--large {
+  font-size: $font-size-large;
+  height: $element-height-large;
+  width: $element-height-large;
+}
+
+.avatar--xlarge {
+  font-size: $font-size-xlarge;
+  height: $element-height-xlarge;
+  width: $element-height-xlarge;
+
+  --avatar-focus-ring-size: 5px;
+}
+
+.avatar--2xlarge {
+  font-size: $font-size-2xlarge;
+  height: $element-height-2xlarge;
+  width: $element-height-2xlarge;
+
+  --avatar-focus-ring-size: 5px;
+}
+
+.avatar--3xlarge {
+  font-size: $font-size-3xlarge;
+  height: $element-height-3xlarge;
+  width: $element-height-3xlarge;
+
+  --avatar-focus-ring-size: 6px;
+}
+
+.avatar--4xlarge {
+  font-size: $font-size-4xlarge;
+  height: $element-height-4xlarge;
+  width: $element-height-4xlarge;
+
+  --avatar-focus-ring-size: 6px;
+}
+
+.avatar--5xlarge {
+  font-size: $font-size-5xlarge;
+  height: $element-height-5xlarge;
+  width: $element-height-5xlarge;
+
+  --avatar-focus-ring-size: 6px;
+}
+
+.avatar--custom {
+  font-size: var(--avatar-font-size);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+}
+
+.avatar--image {
+  @mixin themed .avatar {
+    --avatar-actionable-background-color: $theme-primary-palette-text-color;
+  }
+}
+
+.avatar--primary {
+  @mixin themed .avatar {
+    --avatar-background-color: var(--phork-accent-color, $theme-color-accent);
+    --avatar-text-color: var(--phork-accent-color-contrast, $theme-color-accent-contrast);
+  }
+
+  &.avatar--dark {
+    --avatar-focus-ring-opacity: 0.3;
+  }
+}
+
+.avatar--neutral {
+  @mixin themed .avatar {
+    --avatar-actionable-background-color: $theme-color-neutral-D10;
+    --avatar-background-color: $theme-color-neutral;
+    --avatar-text-color: $theme-color-neutral-contrast;
+  }
+
+  &.avatar--dark {
+    --avatar-focus-ring-opacity: 0.3;
+  }
+}
+
+.avatar--contrast {
+  @mixin themed .avatar {
+    --avatar-background-color: $theme-contrast-palette-text-color;
+    --avatar-text-color: var(--phork-contrast-color, $theme-contrast-palette-background-color);
+  }
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.avatar--image {
+  .avatar__content {
+    opacity: 0;
+  }
+}

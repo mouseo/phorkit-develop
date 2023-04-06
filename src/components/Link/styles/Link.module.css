@@ -1,0 +1,83 @@
+a.link,
+.linkContainer a {
+  color: var(--link-text-color, currentColor);
+  cursor: pointer;
+  display: inline;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+a.link--unstyled {
+  outline: none;
+}
+
+a.link:not(.link--unstyled),
+.linkContainer a {
+  &:hover,
+  &.is-hovered {
+    color: var(--link-hovered-color);
+  }
+
+  &:active,
+  &.is-active {
+    color: var(--link-active-color);
+  }
+
+  &:focus,
+  &.is-focused {
+    outline: 1px solid currentColor;
+    outline-offset: 0.1rem;
+    text-decoration: none;
+  }
+}
+
+a.link,
+.linkContainer {
+  @mixin themed {
+    --link-text-color: var(--phork-accent-color, $theme-color-accent);
+    --link-hovered-color: var(--phork-accent-color-L10, $theme-color-accent-L10);
+    --link-active-color: var(--phork-accent-color-D10, $theme-color-accent-D10);
+  }
+}
+
+a.link.link--contrast.link--light,
+.linkContainer.linkContainer--contrast.linkContainer--light {
+  --link-text-color: $light-contrast-palette-text-color;
+  --link-hovered-color: $light-contrast-palette-quiet-color;
+  --link-active-color: $light-contrast-palette-text-color;
+}
+
+a.link.link--contrast.link--dark,
+.linkContainer.linkContainer--contrast.linkContainer--dark {
+  --link-text-color: $dark-contrast-palette-text-color;
+  --link-hovered-color: $dark-contrast-palette-quiet-color;
+  --link-active-color: $dark-contrast-palette-text-color;
+}
+
+/**
+ * Always underline contrast links otherwise
+ * it won't be obvious that they are links.
+ */
+a.link--contrast,
+a.link--underline,
+.linkContainer--contrast a,
+.linkContainer--underline a {
+  position: relative;
+
+  &:not(:focus):not(.is-focused) {
+    &:before {
+      border-bottom: 1px solid currentColor;
+      content: '';
+      height: 100%;
+      opacity: 0.7;
+      position: absolute;
+      top: 0.1rem;
+      left: -0.1rem;
+      right: -0.1rem;
+    }
+  }
+}
+
+a.link--block {
+  display: block;
+}

@@ -1,0 +1,473 @@
+.formbox {
+  display: inline-block;
+  font-size: $font-size-small;
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/**
+ * 1. Change the background of the entire input when
+ *    the content is auto-filled.
+ */
+.formbox--underline {
+  &.is-labeled {
+    padding-top: 16px;
+  }
+
+  &.is-autoFilled {
+    background: var(--formbox-autofilled-background-color); /* [1] */
+  }
+}
+
+.formbox--outline,
+.formbox--pill {
+  &.is-labeled {
+    padding-top: 18px;
+  }
+}
+
+.formbox--minimal {
+  &.is-labeled {
+    padding-top: 16px;
+  }
+}
+
+/**
+ * 1. Shift the input, label and the icons up so they're in the
+ *    middle of the filled container.
+ * 2. Unlike the others, put the padding on the parent so
+ *    the background color encompasses the label
+ */
+.formbox--filled.is-labeled {
+  &.is-transitional.is-empty:not(.is-focused) {
+    --formbox-input-vertical-content-shift: -7px; /* [1] */
+  }
+
+  > .formboxInputContainer--filled {
+    padding-top: 20px; /* [2] */
+  }
+}
+
+/**
+ * Style the input container rather than the input itself
+ * so that it can automatically make room for the icons.
+ */
+.formboxInputContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  position: relative;
+  transition-duration: 150ms;
+  transition-property: background-color, padding;
+  transition-timing-function: ease;
+}
+
+.formboxInputContainer--underline,
+.formboxInputContainer--filled {
+  $box-shadow-position: inset 0 -1px 0 0;
+  box-shadow: $box-shadow-position var(--formbox-input-container-border-color);
+
+  &:not(.formboxInputContainer--readOnly) {
+    &:hover,
+    &.is-hovered {
+      box-shadow: $box-shadow-position var(--formbox-input-container-hovered-border-color);
+    }
+
+    &:after {
+      background-color: var(--formbox-input-container-focused-border-color);
+      bottom: 0;
+      content: '';
+      height: 1px;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: transform 300ms ease;
+      transform: scaleX(0);
+      width: 100%;
+    }
+
+    &:focus,
+    &.is-focused {
+      &:after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.formboxInputContainer--underline {
+  padding: 3px 0;
+
+  &.is-autoFilled {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+/**
+ * 1. Prevent the underline from being hidden.
+ */
+.formboxInputContainer--filled {
+  border-top-left-radius: $border-radius-small;
+  border-top-right-radius: $border-radius-small;
+  margin-bottom: 1px; /* [1] */
+  padding: 6px 8px 2px 8px;
+
+  &:before {
+    background-color: var(--formbox-input-container-border-color);
+    border-top-left-radius: $border-radius-small;
+    border-top-right-radius: $border-radius-small;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0.1;
+    position: absolute;
+    pointer-events: none;
+    right: 0;
+    top: 0;
+    transition: background-color 150ms ease;
+  }
+
+  &:not(.formboxInputContainer--readOnly) {
+    &:hover,
+    &.is-hovered {
+      &:before {
+        background-color: var(--formbox-input-container-hovered-border-color);
+      }
+    }
+
+    &:focus,
+    &.is-focused {
+      &:before {
+        background-color: var(--formbox-input-container-focused-border-color);
+      }
+    }
+  }
+}
+
+/**
+ * 1. Move the focus ring out by a pixel to adjust for the border.
+ */
+.formboxInputContainer--outline,
+.formboxInputContainer--pill {
+  background-color: var(--formbox-input-container-background-color);
+  border: 1px solid var(--formbox-input-container-border-color);
+  min-height: $element-height-medium;
+
+  &:not(.formboxInputContainer--readOnly) {
+    @mixin prepareFocusRing -1px; /* [1] */
+    @mixin setFocusRingOpacity var(--formbox-input-container-focus-ring-opacity, 0.1);
+
+    &:hover,
+    &.is-hovered {
+      border-color: var(--formbox-input-container-hovered-border-color);
+    }
+
+    &:focus,
+    &.is-focused {
+      @mixin makeFocusRing var(--formbox-input-container-focused-border-color);
+
+      border-color: var(--formbox-input-container-focused-border-color);
+    }
+  }
+}
+
+.formboxInputContainer--outline {
+  border-radius: $border-radius-medium;
+  padding: 3px 8px 3px 8px;
+}
+
+.formboxInputContainer--pill {
+  border-radius: $element-height-medium;
+  padding: 3px 16px 3px 16px;
+}
+
+.formboxInputContainer--minimal {
+  &:not(.formboxInputContainer--readOnly) {
+    &:focus,
+    &.is-focused {
+      caret-color: var(--formbox-input-container-focused-border-color);
+    }
+  }
+}
+
+/**
+ * Change the background color of the input container
+ * when the content is auto-filled.
+ */
+.formboxInputContainer--outline,
+.formboxInputContainer--pill,
+.formboxInputContainer--filled {
+  &.is-autoFilled {
+    background: var(--formbox-autofilled-background-color);
+  }
+}
+
+.formboxLabel {
+  color: var(--formbox-label-text-color);
+  font-size: $font-size-xsmall;
+  left: 0;
+  line-height: 1.5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 150ms ease;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.formboxLabel--centered {
+  text-align: center;
+}
+
+.formboxLabel--filled {
+  left: 8px;
+  top: 4px;
+}
+
+.formboxLabel--pill {
+  left: 17px;
+}
+
+.formboxLabel--underline {
+  top: 4px;
+
+  &.is-autoFilled {
+    padding-left: 8px;
+  }
+}
+
+/**
+ * 1. The input container top margin and top padding.
+ * 2. The input container left padding.
+ */
+.formboxLabel--placeholder {
+  font-size: var(--formbox-input-font-size, $font-size-large);
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+
+  &.formboxLabel--hasIconBefore {
+    padding-left: var(--formbox-left-icon-space, 20px);
+  }
+
+  &.formboxLabel--hasIconAfter {
+    padding-right: var(--formbox-right-icon-space, 20px);
+  }
+
+  &.formboxLabel--underline {
+    margin-top: var(--formbox-placeholder-top-margin, 17px);
+    top: 4px; /* [1] */
+  }
+
+  &.formboxLabel--filled {
+    top: calc(6px + var(--formbox-input-vertical-content-shift, 0px)); /* [1] */
+    margin-top: var(--formbox-placeholder-top-margin, 17px);
+  }
+
+  &.formboxLabel--outline {
+    left: 8px;
+    top: 8px; /* [1] */
+    margin-top: var(--formbox-placeholder-top-margin, 17px);
+  }
+
+  &.formboxLabel--pill {
+    left: 16px;
+    top: 8px; /* [1] */
+    margin-top: var(--formbox-placeholder-top-margin, 17px);
+  }
+
+  &.formboxLabel--minimal {
+    top: 1px;
+    margin-top: var(--formbox-placeholder-top-margin, 17px);
+  }
+}
+
+.formbox.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.formbox.is-readonly {
+  pointer-events: none;
+}
+
+.formbox--primary {
+  @mixin themed .formbox {
+    --formbox-autofilled-background-color: var(--phork-accent-color-O5, $theme-color-accent-O5);
+    --formbox-icon-color: $theme-primary-palette-quieter-color;
+    --formbox-icon-hovered-color: var(--phork-accent-color, $theme-color-accent);
+    --formbox-input-container-background-color: transparent;
+    --formbox-input-container-border-color: $theme-primary-palette-quietest-color;
+    --formbox-input-container-focused-border-color: var(--phork-accent-color, $theme-color-accent);
+    --formbox-input-container-hovered-border-color: $theme-primary-palette-quieter-color;
+    --formbox-label-text-color: $theme-primary-palette-quiet-color;
+  }
+
+  &.formbox--dark {
+    --formbox-input-container-focus-ring-opacity: 0.3;
+  }
+}
+
+.formbox--contrast {
+  @mixin themed .formbox {
+    --formbox-autofilled-background-color: $theme-color-BG50-O10;
+    --formbox-icon-color: $theme-contrast-palette-quieter-color;
+    --formbox-icon-hovered-color: $theme-contrast-palette-text-color;
+    --formbox-input-container-background-color: transparent;
+    --formbox-input-container-border-color: $theme-contrast-palette-quieter-color;
+    --formbox-input-container-focused-border-color: $theme-contrast-palette-text-color;
+    --formbox-input-container-hovered-border-color: $theme-contrast-palette-quieter-color;
+    --formbox-label-text-color: $theme-contrast-palette-quiet-color;
+  }
+}
+
+.formbox.is-success {
+  @mixin themed .formbox {
+    --formbox-input-container-border-color: $theme-color-success;
+    --formbox-input-container-focused-border-color: $theme-color-success-D10;
+    --formbox-input-container-hovered-border-color: $theme-color-success-D10;
+  }
+
+  &.formbox--dark {
+    --formbox-input-container-focus-ring-opacity: 0.3;
+  }
+}
+
+.formbox.is-warning {
+  @mixin themed .formbox {
+    --formbox-input-container-border-color: $theme-color-warning;
+    --formbox-input-container-focused-border-color: $theme-color-warning;
+    --formbox-input-container-hovered-border-color: $theme-color-warning-D10;
+  }
+
+  &.formbox--dark {
+    --formbox-input-container-focus-ring-opacity: 0.3;
+  }
+}
+
+.formbox.is-danger {
+  @mixin themed .formbox {
+    --formbox-input-container-border-color: $theme-color-danger;
+    --formbox-input-container-focused-border-color: $theme-color-danger-D10;
+    --formbox-input-container-hovered-border-color: $theme-color-danger-D10;
+  }
+
+  &.formbox--dark {
+    --formbox-input-container-focus-ring-opacity: 0.3;
+  }
+}
+
+/**
+ * This resorts to using !important so that it can override any
+ * custom styles applied.
+ */
+.formbox--transparent {
+  --formbox-input-container-background-color: transparent !important;
+  --formbox-input-container-border-color: transparent !important;
+  --formbox-input-container-focused-border-color: transparent !important;
+  --formbox-input-container-hovered-border-color: transparent !important;
+}
+
+/* input-specific - these must go last */
+
+/**
+ * 1. Allow clicking on the down arrow to show the dropdown.
+ * 2. Prevent the text from overflowing into the arrow.
+ * 3. Visually align the options with the container.
+ */
+.formbox--select {
+  select:not([multiple]) {
+    margin-right: -20px; /* [1] */
+    padding-right: 20px; /* [2] */
+
+    .formboxInputContainer--filled & {
+      margin-right: -24px; /* [1] */
+      padding-right: 24px; /* [2] */
+      margin-left: -8px; /* [3] */
+      padding-left: 8px; /* [3] */
+    }
+
+    .formboxInputContainer--outline &,
+    .formboxInputContainer--pill & {
+      margin-right: -25px; /* [1] */
+      padding-right: 25px; /* [2] */
+      margin-left: -9px; /* [3] */
+      padding-left: 9px; /* [3] */
+    }
+  }
+
+  select[multiple] {
+    .formboxInputContainer--filled & {
+      margin-left: -8px; /* [3] */
+      margin-right: -12px; /* [3] */
+    }
+
+    .formboxInputContainer--outline &,
+    .formboxInputContainer--pill & {
+      margin-left: -8px; /* [3] */
+      margin-right: -12px; /* [3] */
+    }
+  }
+}
+
+/**
+ * 1. Textareas have a top left corner marker that
+ *    other inputs don't have.
+ */
+.formbox--textarea {
+  .formboxInputContainer--underline,
+  .formboxInputContainer--filled,
+  .formboxInputContainer--outline {
+    padding: 4px 0 4px 8px;
+
+    &:not(.formboxInputContainer--readOnly) {
+      &.is-focused {
+        &:before {
+          border-color: var(--formbox-input-container-focused-border-color);
+        }
+      }
+    }
+  }
+
+  .formboxInputContainer--underline /* [1] */ {
+    margin-top: 4px;
+
+    &:before {
+      border-left: 1px solid var(--formbox-input-container-border-color);
+      border-top: 1px solid var(--formbox-input-container-border-color);
+      content: '';
+      height: 8px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 8px;
+    }
+  }
+
+  &.is-labeled {
+    .formboxInputContainer--filled {
+      padding-top: 20px;
+    }
+  }
+
+  /**
+   * 1. The input container top margin and top padding plus the
+   *    original 17px.
+   * 2. The input container left padding.
+   */
+  .formboxLabel--placeholder {
+    top: 25px; /* [1] */
+    left: 8px; /* [2] */
+    margin-top: 0;
+
+    &.formboxLabel--filled {
+      top: 6px;
+    }
+  }
+}

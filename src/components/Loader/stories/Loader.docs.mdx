@@ -1,0 +1,38 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Flex } from 'components/Flex';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { Loader } from '../Loader';
+
+<PageTitle src="components/Loader" title="Loader" />
+<Subtitle />
+<Description />
+
+#### Scale
+
+[Small](#scale--small) | [Medium](#scale--medium) | [Large](#scale--large) | [2XLarge](#scale--2xlarge) | [3XLarge](#scale--3xlarge)
+
+#### Position
+
+[Relative](#position--relative) | [Absolute](#position--absolute) | [Fixed](#position--fixed)
+
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Assorted sizes
+
+<Canvas>
+  <Flex alignItems="center" direction="row" justifyContent="space-around">
+    <Loader size={24} />
+    <Loader size={40} />
+    <Loader size={60} />
+    <Loader size={82} />
+  </Flex>
+</Canvas>
+
+### Contrast
+
+<Canvas contrast>
+  <Loader contrast />
+</Canvas>

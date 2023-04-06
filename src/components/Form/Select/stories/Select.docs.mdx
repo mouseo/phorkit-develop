@@ -1,0 +1,323 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { SearchIcon } from 'icons/SearchIcon';
+import { TimesIcon } from 'icons/TimesIcon';
+import { Looper } from 'components/Looper';
+import { Rhythm } from 'components/Rhythm';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { FormComponentDemo } from '../../stories/helpers/FormComponentDemo';
+import { NotifiedSelect } from '../NotifiedSelect';
+import { Select } from '../Select';
+import { options } from './helpers/options';
+import { variants } from './helpers/variants';
+
+<PageTitle src="components/Form/Select" title="Select" />
+<Subtitle />
+<Description />
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+## Examples
+
+### Basic select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Multiple select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue={['yellow', 'blue']} property="values" type="select">
+          <Select multiple label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Labeled select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Transitional labeled select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select transitional label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Transitional labeled select with icons
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select
+            transitional
+            iconAfter={<TimesIcon size={8} />}
+            iconBefore={SearchIcon}
+            label="Super fantastic label"
+            options={options}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Select with placeholder
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select
+            label="Super fantastic label"
+            options={options}
+            placeholder={{ label: 'Choose a color' }}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Select with separate list and view placeholder
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select
+            transitional
+            label="Super fantastic label"
+            options={options}
+            placeholder={{ optionLabel: '(None)', label: 'Choose a color' }}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Select with list placeholder only
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select
+            transitional
+            label="Super fantastic label"
+            options={options}
+            placeholder={{ optionLabel: '(None)', label: undefined }}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Select with disabled placeholder
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo property="value" type="select">
+          <Select
+            transitional
+            label="Super fantastic label"
+            options={options}
+            placeholder={{ label: 'Choose a color', disabled: true }}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Read only select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select readOnly label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Read only multiple select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue={['yellow', 'blue']} property="values" type="select">
+          <Select multiple readOnly label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Disabled select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select disabled label="Super fantastic label" options={options} variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Danger select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select transitional label="Super fantastic label" options={options} validity="danger" variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Warning select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select transitional label="Super fantastic label" options={options} validity="warning" variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Success select
+
+<Canvas>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select transitional label="Super fantastic label" options={options} validity="success" variant={variant} />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+### Contrast select
+
+<Canvas contrast>
+  <Looper
+    list={variants}
+    render={variant => (
+      <Rhythm grouped py={3}>
+        <FormComponentDemo initialValue="yellow" property="value" type="select">
+          <Select
+            contrast
+            id="demo-contrast-select"
+            label="Super fantastic label"
+            options={options}
+            variant={variant}
+          />
+        </FormComponentDemo>
+      </Rhythm>
+    )}
+  />
+</Canvas>
+
+## Notifications
+
+<Canvas>
+  <Looper
+    list={['danger', 'warning', 'success', 'primary', 'neutral']}
+    render={level => (
+      <Looper
+        list={variants}
+        render={variant => (
+          <Rhythm grouped mb={4}>
+            <FormComponentDemo initialValue="yellow" property="value" type="select">
+              <NotifiedSelect
+                label="Super fantastic label"
+                level={level}
+                notification={`This is an example ${level} notification.`}
+                options={options}
+                variant={variant}
+              />
+            </FormComponentDemo>
+          </Rhythm>
+        )}
+      />
+    )}
+  />
+</Canvas>

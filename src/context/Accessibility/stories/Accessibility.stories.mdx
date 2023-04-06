@@ -1,0 +1,68 @@
+import { Canvas, Meta } from '@storybook/addon-docs';
+import { Flex } from 'components/Flex';
+import { Rhythm } from 'components/Rhythm';
+import { Typography } from 'components/Typography';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { ThemeWrapper } from 'stories/helpers/ThemeWrapper';
+import { AccessibilityProvider, useAccessibility, useInputEventType } from '../index';
+import styles from './AccessibilityDemo.module.css';
+
+<Meta
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+  title="Utilities/Accessibility"
+/>
+
+<PageTitle src="context/Accessibility" title="Accessibility" />
+
+### AccessibilityProvider, useAccessibility and useInputEventType
+
+<Canvas>
+  <ThemeWrapper>
+    {({ themeId }) => (
+      <AccessibilityProvider>
+        <React.Fragment>
+          {React.createElement(() => {
+            const accessible = useAccessibility();
+            const eventType = useInputEventType();
+            const buttonClassName = [styles.button, styles[`button--${themeId}`], accessible && styles['is-accessible']]
+              .filter(Boolean)
+              .join(' ');
+            return (
+              <div>
+                <Flex wrap direction="row">
+                  <Rhythm m={2} mb={4}>
+                    <Typography as="div" color="primary" style={{ width: '120px' }} variants={['xsmall-caps']}>
+                      <Typography volume="quiet">Is accessible</Typography> {accessible ? 'yes' : 'no'}
+                    </Typography>
+                    <Typography as="div" color="primary" style={{ width: '140px' }} variants={['xsmall-caps']}>
+                      <Typography volume="quiet">Event type</Typography> {eventType || '-'}
+                    </Typography>
+                  </Rhythm>
+                </Flex>
+                <Flex direction="row">
+                  <button className={buttonClassName} type="button">
+                    Action
+                  </button>
+                  <button className={buttonClassName} type="button">
+                    Action
+                  </button>
+                  <button className={buttonClassName} type="button">
+                    Action
+                  </button>
+                  <button className={buttonClassName} type="button">
+                    Action
+                  </button>
+                </Flex>
+              </div>
+            );
+          })}
+        </React.Fragment>
+      </AccessibilityProvider>
+    )}
+  </ThemeWrapper>
+</Canvas>

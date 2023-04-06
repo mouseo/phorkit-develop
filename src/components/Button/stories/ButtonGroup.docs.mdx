@@ -1,0 +1,66 @@
+import { ArgsTable, Description, Primary, Stories, Subtitle, PRIMARY_STORY } from '@storybook/addon-docs';
+import { StateWrapper } from 'docs/helpers/StateWrapper';
+import { Canvas } from 'stories/helpers/Canvas';
+import { PageTitle } from 'stories/helpers/PageTitle';
+import { ButtonGroup } from '../ButtonGroup';
+
+<PageTitle src="components/Button" title="ButtonGroup" />
+<Subtitle />
+<Description />
+
+#### Colors
+
+[Primary](#color--primary) | [Success](#color--success) | [Warning](#color--warning) | [Danger](#color--danger) | [Neutral](#color--neutral) | [Black](#color--black) | [White](#color--white)
+
+#### Shapes
+
+[Pill](#shape--pill) | [Brick](#shape--brick)
+
+#### Spacing
+
+[Divided](#spacing--divided) | [Joined](#spacing--joined) | [Cozy](#spacing--cozy) | [Comfy](#spacing--comfy)
+
+#### Weights
+
+[Solid](#weight--solid) | [Shaded](#weight--shaded) | [Outlined](#weight--outlined) | [Ghost](#weight--ghost) | [Inline](#weight--inline)
+
+#### Sizes
+
+[Small](#size--small) | [Medium](#size--medium) | [Large](#size--large)
+
+#### Orientation
+
+[Horizontal](#orientation--horizontal) | [Vertical](#orientation--vertical)
+
+#### Align
+
+[Left](#align--left) | [Center](#align--center) | [Right](#align--right)
+
+#### Display
+
+[Inline](#display--inline) | [Block](#display--block)
+
+<Primary />
+<ArgsTable story={PRIMARY_STORY} />
+<Stories />
+
+### Contrast
+
+<Canvas contrast>
+  <StateWrapper initialState="second">
+    {({ state, setState }) => (
+      <ButtonGroup
+        contrast
+        buttons={[
+          { id: 'first', label: 'First', selected: state === 'first' },
+          { id: 'second', label: 'Second', selected: state === 'second' },
+          { id: 'third', label: 'Third', selected: state === 'third' },
+          { id: 'fourth', label: 'Fourth', selected: state === 'fourth' },
+        ]}
+        onClick={(event, id) => setState(id)}
+        shape="brick"
+        spacing="joined"
+      />
+    )}
+  </StateWrapper>
+</Canvas>

@@ -1,0 +1,313 @@
+@import '../../../styles/common/mixins/addScrollbar.css';
+
+.dropdown {
+  outline: none;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+
+  &:focus-within {
+    z-index: calc($layout-z-index-popover + 2);
+  }
+}
+
+.dropdown--readOnly {
+  pointer-events: none;
+  cursor: default;
+}
+
+/**
+ * 1. Disable the input when the dropdown is open to prevent
+ *    a flash when clicking to close the dropdown.
+ */
+.dropdownInput {
+  cursor: pointer;
+  padding: 0;
+  z-index: calc($layout-z-index-popover + 1);
+
+  .dropdown.is-visible:not(.is-clearable) & {
+    pointer-events: none; /* [1] */
+  }
+}
+
+.dropdownOptionsContainer {
+  left: 0;
+  overflow: visible;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  user-select: none;
+
+  &.is-visible {
+    z-index: $layout-z-index-popover;
+
+    &:not(.dropdownOptionsContainer--contained).is-accessible,
+    &.dropdownOptionsContainer--outline,
+    &.dropdownOptionsContainer--pill {
+      &.is-focused {
+        &:after {
+          border: 1px solid var(--dropdown-options-focused-border-color);
+          bottom: 0;
+          content: '';
+          left: 0;
+          pointer-events: none;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        &.dropdownOptionsContainer--underline,
+        &.dropdownOptionsContainer--filled {
+          &:after {
+            border-top: none;
+          }
+        }
+
+        &.dropdownOptionsContainer--outline {
+          &:after {
+            border-radius: $border-radius-medium;
+          }
+        }
+
+        &.dropdownOptionsContainer--pill {
+          &:after {
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dropdownOptionsContainer--inline {
+  position: relative;
+}
+
+.dropdownOptionsContainer--contained {
+  &:before {
+    background-color: var(--dropdown-options-container-background-color);
+    border-radius: $border-radius-medium;
+    bottom: 0;
+    box-shadow: var(--dropdown-options-container-box-shadow);
+    content: '';
+    left: -20px;
+    opacity: 0;
+    padding-top: var(--dropdown-options-container-top-height, 52px);
+    pointer-events: none;
+    position: absolute;
+    right: -20px;
+    top: calc(-1 * var(--dropdown-options-container-top-height, 52px));
+    transition: opacity 300ms ease;
+
+    .is-visible & {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &.dropdownOptionsContainer--underline,
+  &.dropdownOptionsContainer--minimal,
+  &.dropdownOptionsContainer--filled {
+    &:after {
+      background-color: var(--dropdown-options-container-border-color);
+      bottom: 0;
+      content: '';
+      height: 1px;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 200ms ease;
+    }
+  }
+
+  &.dropdownOptionsContainer--underline,
+  &.dropdownOptionsContainer--minimal {
+    &.is-visible {
+      &:after {
+        left: -20px;
+        right: -20px;
+        opacity: 1;
+      }
+    }
+  }
+
+  &.dropdownOptionsContainer--filled {
+    &:before {
+      left: -14px;
+      right: -14px;
+    }
+
+    &.is-visible {
+      &:after {
+        left: -14px;
+        right: -14px;
+        opacity: 1;
+      }
+    }
+  }
+
+  &.dropdownOptionsContainer--outline {
+    &:before {
+      border-radius: $border-radius-large;
+    }
+  }
+
+  &.dropdownOptionsContainer--pill {
+    &:before {
+      border-radius: 8px;
+      left: -14px;
+      right: -14px;
+    }
+  }
+}
+
+.dropdownOptionsContainer--filled {
+  margin-top: -2px;
+}
+
+.dropdownOptionsContainer--outline,
+.dropdownOptionsContainer--pill {
+  margin-top: 8px;
+
+  &.dropdownOptionsContainer--contained {
+    &:before {
+      padding-top: calc(16px + var(--dropdown-options-container-top-height, 52px));
+      top: calc(-1 * calc(16px + var(--dropdown-options-container-top-height, 52px)));
+      bottom: -14px;
+    }
+  }
+}
+
+.dropdownOptionsContainer--outline {
+  border-radius: $border-radius-medium;
+}
+
+.dropdownOptionsContainer--pill {
+  border-radius: 8px;
+}
+
+/**
+ * 1. Move up the options so the top border of the first one
+ *    is hidden.
+ */
+.dropdownOptions {
+  @mixin addHiddenScrollbar;
+
+  border-radius: inherit;
+  max-height: 0;
+  overflow: auto;
+  position: relative;
+  transition: max-height 300ms ease;
+
+  .dropdownOptionsContainer.is-visible & {
+    max-height: var(--dropdown-max-height, 160px);
+  }
+
+  .dropdownOptionsContainer--raised.is-visible & {
+    box-shadow: var(--dropdown-options-raised-box-shadow);
+    overflow: overlay;
+  }
+
+  .dropdownOptionsContainer--contained.dropdownOptionsContainer--underline &,
+  .dropdownOptionsContainer--contained.dropdownOptionsContainer--minimal & {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    ul {
+      padding-top: 8px;
+    }
+  }
+
+  .dropdownOptionsContainer--contained.dropdownOptionsContainer--filled & {
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    ul {
+      padding-top: 8px;
+    }
+  }
+
+  .dropdownOptionsContainer--outline &,
+  .dropdownOptionsContainer--pill & {
+    margin-top: 0;
+  }
+
+  &.is-empty {
+    .dropdownOptionsContainer.is-visible & {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* .dropdownOptionsScrollSync {} */
+
+.dropdownOptionsScrollSync--contained {
+  &.dropdownOptionsScrollSync--underline,
+  &.dropdownOptionsScrollSync--minimal {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  &.dropdownOptionsScrollSync--filled {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+}
+
+.dropdown--primary {
+  @mixin themed .dropdown {
+    --dropdown-options-bottom-border-color: $theme-primary-palette-border-color;
+    --dropdown-options-focused-border-color: var(--phork-accent-color, $theme-color-accent);
+    --dropdown-options-container-background-color: $theme-primary-palette-background-color;
+    --dropdown-options-container-box-shadow: $theme-box-shadow-10;
+    --dropdown-options-container-border-color: $theme-primary-palette-border-color;
+    --dropdown-options-raised-box-shadow: $theme-box-shadow-10;
+  }
+}
+
+.dropdown--contrast {
+  @mixin themed .dropdown {
+    --dropdown-options-focused-border-color: $theme-contrast-palette-text-color;
+    --dropdown-options-container-background-color: var(
+      --phork-contrast-color,
+      $theme-contrast-palette-background-color
+    );
+    --dropdown-options-container-box-shadow: $theme-box-shadow-10;
+    --dropdown-options-container-border-color: $theme-contrast-palette-text-color;
+    --dropdown-options-raised-box-shadow: $theme-box-shadow-10;
+  }
+
+  &.dropdown--light {
+    --dropdown-options-bottom-border-color: $light-contrast-palette-quietest-color;
+  }
+
+  &.dropdown--dark {
+    --dropdown-options-bottom-border-color: $dark-contrast-palette-quieter-color;
+  }
+}
+
+.dropdownArrowIcon {
+  transform: rotate(0deg);
+  transition: transform 200ms cubic-bezier(0.4, 0, 0, 1.3);
+
+  &.dropdownArrowIcon--inverted {
+    transform: rotate(180deg);
+  }
+}
+
+/**
+ * 1. Add some padding for easier clicking
+ */
+.dropdownButtonIcon {
+  @mixin unbutton;
+
+  padding: 2px 0 2px 4px; /* [1] */
+}
